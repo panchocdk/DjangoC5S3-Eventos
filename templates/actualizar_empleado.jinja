@@ -1,0 +1,27 @@
+{% extends 'index.jinja' %}
+
+{% block content %}
+
+    <div class="container">
+
+        <h3>Actualizar un Empleado</h3>
+
+        <form action="" method="post">
+
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token}}">
+
+            <div>
+
+                Nombre:<input type="text" name="nombre" value="{{ empleado.nombre }}" class="form-control">
+                Apellido:<input type="text" name="apellido" value="{{ empleado.apellido }}" class="form-control">
+                Legajo:<input type="text" name="numero_legajo" value="{{ empleado.numero_legajo }}" class="form-control">
+
+                <button type="submit" class="button">Actualizar</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

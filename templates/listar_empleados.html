@@ -1,0 +1,40 @@
+{% extends 'index.jinja'%}
+
+{% block content %}
+
+    <div class='container'>
+    
+        <h3>Lista de productos</h3>
+
+        <div>
+        
+            <table class="center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Numero de Legajo</th>
+                        <th>Activo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                    <tr>
+                        <td>{{ empleado.id }}</td>
+                        <td>{{ empleado.nombre }}</td>
+                        <td>{{ empleado.apellido }}</td>
+                        <td>{{ empleado.numero_legajo }}</td>
+                        <td>{{ empleado.activo }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+
+            <a href="{{ '/crear_empleado' }}" class="button">Registrar un Empleado</a>
+
+        </div>
+    </div>
+
+{% endblock %}
