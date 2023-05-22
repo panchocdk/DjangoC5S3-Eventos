@@ -58,3 +58,17 @@ def activar_empleado(request, id):
         mensaje = "El empleado no existe."
         context = {'mensaje': mensaje}
         return render(request, 'activar_empleado.html', context)
+
+#vista desactivar_empleado    
+def desactivar_empleado(request, id):
+    try:
+        empleado = Empleado.objects.get(id=id)
+        empleado.activo = False
+        empleado.save()
+        mensaje = "Registro de empleado desactivado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_empleado.html', context)
+    except Empleado.DoesNotExist:
+        mensaje = "El empleado no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_empleado.html', context)
