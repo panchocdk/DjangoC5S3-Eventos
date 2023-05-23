@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from.models import Empleado
 from .forms import EmpleadoForm
@@ -23,18 +23,19 @@ def crear_empleado(request):
     context={
         'form':form
         }
-    return render(request, 'crear_empleado.jinja', context)
+    return render(request, 'crear_empleado.html', context)
 
 #Vista para Actualizar un Empleado
 def actualizar_empleado(request, empleado_id):
-    empleado=Empleado.objects.get(id=empleado_id)
-    context={'empleado':empleado}
-    if request.POST:
-        empleado.nombre=request.POST['nombre']
-        empleado.apellido=int(request.POST['apellido'])
-        empleado.numero_legajo=request.POST['numero_legajo']
-        empleado.save()
-    return render(request, 'actualizar_empleado.jinja', context)
+    empleado = Empleado.objects.get(id=empleado_id)
+    if request.method == 'POST':
+        form = EmpleadoForm(request.POST, instance=empleado)
+        if form.is_valid():
+            form.save()
+    else:
+        form = EmpleadoForm(instance=empleado)
+    context = {'form': form}
+    return render(request, 'actualizar_empleado.html', context)
     
 #Vista para Listar a los Empleados
 def listar_empleados(request):
@@ -43,3 +44,17 @@ def listar_empleados(request):
         'empleados':empleados
     }
     return render(request,'listar_empleados.html', context)
+
+#vista activar_empleado 
+def activar_empleado(request, id):
+    try:
+        empleado = Empleado.objects.get(id=id)
+        empleado.activo = True
+        empleado.save()
+        mensaje = "Registro de empleado activado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_empleado.html', context)
+    except Empleado.DoesNotExist:
+        mensaje = "El empleado no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_empleado.html', context)
