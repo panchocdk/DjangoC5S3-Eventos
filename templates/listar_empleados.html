@@ -1,35 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Listar Empleados</title>
-    <style>
-        .btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            cursor: pointer;
-        }
-        .btn-actualizar {
-            background-color: #4CAF50;
-        }
-        .btn-eliminar {
-            background-color: #f44336;
-        }
-    </style>
-</head>
-<body>
-    <h1>Listado de Empleados</h1>
-    <ul>
-        {% for empleado in empleados %}
-        <li>
-            Nombre: {{ empleado.nombre }}<br>
-            Apellido: {{ empleado.apellido }}<br>
-            Número de Legajo: {{ empleado.numero_legajo }}<br>
-            <button class="btn btn-actualizar" onclick="location.href='/actualizar_empleado/{{ empleado.id }}'">Actualizar</button>
-            <button class="btn btn-eliminar" onclick="location.href='/eliminar_empleado/{{ empleado.id }}'">Eliminar</button>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'index.html'%}
+
+{% block content %}
+
+    <div class='container'>
+    
+        <h2>Lista de Empleados</h2>
+
+        <div class="form-group mb-2 col col-lg-6">
+        
+            <table class="center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Numero de Legajo</th>
+                        <th>Activo</th>
+                        <th>Acciones a realizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                    <tr>
+                        <td>{{ empleado.id }}</td>
+                        <td>{{ empleado.nombre }}</td>
+                        <td>{{ empleado.apellido }}</td>
+                        <td>{{ empleado.numero_legajo }}</td>
+                        <td>{{ empleado.activo }}</td>
+                        <td>
+                            <a href="{{ '/actualizar_empleado' }}/{{ empleado.id }}">Actualizar</a>
+                            {% if empleado.activo %}
+                                <a href="{{ '/desactivar_empleado' }}/{{ empleado.id }}">Desactivar</a>
+                            {% else %}
+                                <a href="{{ '/activar_empleado' }}/{{ empleado.id }}">Activar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+
+            <a href="{{ '/crear_empleado' }}" class="button">Registrar un Empleado</a>
+
+        </div>
+    </div>
+
+{% endblock %}

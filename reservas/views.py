@@ -18,8 +18,9 @@ def crear_empleado(request):
                 numero_legajo=form.cleaned_data['numero_legajo']
             )
             empleado.save()
+            return redirect('/listar_empleados/')
         else:
-            return HttpResponseRedirect('/crear_empleado/')
+            return redirect('/listar_empleados/')
     context={
         'form':form
         }
@@ -27,23 +28,30 @@ def crear_empleado(request):
 
 #Vista para Actualizar un Empleado
 def actualizar_empleado(request, empleado_id):
-    empleado = Empleado.objects.get(id=empleado_id)
-    if request.method == 'POST':
-        form = EmpleadoForm(request.POST, instance=empleado)
-        if form.is_valid():
-            form.save()
-    else:
-        form = EmpleadoForm(instance=empleado)
-    context = {'form': form}
-    return render(request, 'actualizar_empleado.html', context)
+    try:
+        empleado = Empleado.objects.get(id=empleado_id)
+        if request.method == 'POST':
+            form = EmpleadoForm(request.POST, instance=empleado)
+            if form.is_valid():
+                form.save()
+            return redirect('/listar_empleados/')
+        else:
+            form = EmpleadoForm(instance=empleado)
+        context = {'form': form}
+        return render(request, 'actualizar_empleado.html', context)
+    except Exception:
+        return render(request, 'error.html')
     
 #Vista para Listar a los Empleados
 def listar_empleados(request):
-    empleados=Empleado.objects.all()
-    context={
-        'empleados':empleados
-    }
-    return render(request,'listar_empleados.html', context)
+    try:
+        empleados=Empleado.objects.all()
+        context={
+            'empleados':empleados
+        }
+        return render(request,'listar_empleados.html', context)
+    except Exception:
+        return render(request, 'error.html')
 
 #vista activar_empleado 
 def activar_empleado(request, id):
