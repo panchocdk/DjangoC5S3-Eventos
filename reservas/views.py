@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from.models import Empleado, Cliente, Coordinador
-from .forms import EmpleadoForm, ClienteForm
+from .forms import EmpleadoForm, ClienteForm, CoordinadorForm
 
 # Create your views here.
 
@@ -143,3 +143,26 @@ def desactivar_coordinador(request, coordinador_id):
         mensaje = "El coordinador no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_coordinador.html', context)
+    
+
+#Vista para Registrar nuevos Coordinadores
+def crear_coordinador(request):
+    #Instancia de ProductoForm
+    form=CoordinadorForm()
+    if request.POST:
+        form=CoordinadorForm(request.POST)
+        if form.is_valid():
+            coordinador=Coordinador(
+                nombre=form.cleaned_data['nombre'],
+                apellido=form.cleaned_data['apellido'],
+                numero_documento=form.cleaned_data['numero_documento'],
+                fecha_alta=form.cleaned_data['fecha_alta']
+            )
+            coordinador.save()
+            return redirect('/listar_coordinadores/')
+        else:
+            return redirect('/listar_coordinadores/')
+    context={
+        'form':form
+        }
+    return render(request, 'crear_coordinador.html', context)
