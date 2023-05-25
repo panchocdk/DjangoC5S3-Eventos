@@ -25,21 +25,55 @@
     }
     .button {
         display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
+        padding: 8px 16px;
+        font-size: 14px;
         font-weight: bold;
         text-decoration:none;
         color: #fff;
         background-color: #007bff;
         border-radius: 4px;
         border: 2px solid #007bff;
+        margin-right: 10px;
+        margin-bottom: 10px;
     }
     .button:hover {
         background-color: #0069d9;
         border-color: #0062cc;
     }
+    .button-employees {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .button-employees:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+    .button-clients {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .button-clients:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+    .button-coordinators {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .button-coordinators:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
 </style>
 <body>
+    <div>
+        <h1>Bienvenido a la página de inicio</h1>
+        <ul>
+            <li><a href="/listar_empleados/" class="button button-employees">Empleados</a></li>
+            <li><a href="/listar_clientes/" class="button button-clients">Clientes</a></li>
+            <li><a href="/listar_coordinadores/" class="button button-coordinators">Coordinadores</a></li>
+        </ul>
+    </div>
     {% block content %}
     {% endblock %}
 </body>
