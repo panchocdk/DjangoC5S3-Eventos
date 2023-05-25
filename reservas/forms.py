@@ -18,4 +18,4 @@ class CoordinadorForm(forms.ModelForm):
 
     class Meta:
         model = Coordinador
-        fields = 'nombre','apellido','numero_documento','fecha_alta'
+        fields = 'nombre','apellido','numero_documento', 'fecha_alta'

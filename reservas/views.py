@@ -149,24 +149,24 @@ def desactivar_coordinador(request, coordinador_id):
 
 #Vista para Registrar nuevos Coordinadores
 def crear_coordinador(request):
-    #Instancia de ProductoForm
-    form=CoordinadorForm()
-    if request.POST:
-        form=CoordinadorForm(request.POST)
+    form = CoordinadorForm()
+    if request.method == 'POST':
+        form = CoordinadorForm(request.POST)
         if form.is_valid():
-            coordinador=Coordinador(
-                nombre=form.cleaned_data['nombre'],
-                apellido=form.cleaned_data['apellido'],
-                numero_documento=form.cleaned_data['numero_documento'],
-                fecha_alta=form.cleaned_data['fecha_alta']
-            )
-            coordinador.save()
-            return redirect('/listar_coordinadores/')
+            numero_documento = form.cleaned_data['numero_documento']
+            if Coordinador.objects.filter(numero_documento=numero_documento).exists():
+                messages.error(request, 'El número de documento ya está en uso.')
+            else:
+                coordinador = form.save()
+                messages.success(request, 'El coordinador se creó correctamente.')
+                return redirect('/listar_coordinadores/')
         else:
-            return redirect('/listar_coordinadores/')
-    context={
-        'form':form
-        }
+            # Pasar los mensajes de error al formulario
+            for field_name, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{form.fields[field_name].label}: {error}')
+
+    context = {'form': form}
     return render(request, 'crear_coordinador.html', context)
 
 
@@ -190,7 +190,7 @@ def actualizar_cliente(request, cliente_id):
             form = ClienteForm(request.POST, instance=cliente)
             if form.is_valid():
                 form.save()
-            return redirect('/listar_cliente/')
+            return redirect('/listar_clientes/')
         else:
             form = ClienteForm(instance=cliente)
         context = {'form': form}
@@ -223,4 +223,24 @@ def activar_cliente(request, cliente_id):
         messages.success(request, 'El cliente ha sido activado exitosamente.')
         return redirect('/listar_clientes/')  
     except Cliente.DoesNotExist:
+        return render(request, 'error.html')
+    
+def listar_clientes(request):
+    clientes = Cliente.objects.all()
+    context = {'clientes': clientes}
+    return render(request, 'listar_clientes.html', context)
+
+def actualizar_coordinador(request, coordinador_id):
+    try:
+        coordinador = Coordinador.objects.get(id=coordinador_id)
+        if request.method == 'POST':
+            form = CoordinadorForm(request.POST, instance=coordinador)
+            if form.is_valid():
+                form.save()
+                return redirect('/listar_coordinadores/')
+        else:
+            form = CoordinadorForm(instance=coordinador)
+        context = {'form': form}
+        return render(request, 'actualizar_coordinador.html', context)
+    except Exception:
         return render(request, 'error.html')

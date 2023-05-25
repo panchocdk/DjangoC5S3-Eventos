@@ -18,7 +18,7 @@ class Coordinador(models.Model):
 
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
-    numero_documento = models.IntegerField()
+    numero_documento = models.IntegerField(unique=True, blank=False)
     fecha_alta = models.DateTimeField()
     activo = models.BooleanField(default=True)
 
