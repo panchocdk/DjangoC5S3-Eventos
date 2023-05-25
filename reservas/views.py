@@ -178,3 +178,20 @@ def listar_coordinadores(request):
         return render(request,'listar_coordinadores.html', context)
     except Exception:
         return render(request, 'error.html')
+    
+
+#Vista para Actualizar un Cliente
+def actualizar_cliente(request, cliente_id):
+    try:
+        cliente = Cliente.objects.get(id=cliente_id)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST, instance=cliente)
+            if form.is_valid():
+                form.save()
+            return redirect('/listar_cliente/')
+        else:
+            form = ClienteForm(instance=cliente)
+        context = {'form': form}
+        return render(request, 'actualizar_cliente.html', context)
+    except Exception:
+        return render(request, 'error.html')
