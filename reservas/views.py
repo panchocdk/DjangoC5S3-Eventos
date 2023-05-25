@@ -124,8 +124,22 @@ def desactivar_cliente(request, id):
         mensaje = "Registro de cliente desactivado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_cliente.html', context)
-    except Empleado.DoesNotExist:
+    except Cliente.DoesNotExist:
         mensaje = "El cliente no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_cliente.html', context)
 
+
+#Vista para Desactivar un Coordinador   
+def desactivar_coordinador(request, coordinador_id):
+    try:
+        coordinador = Coordinador.objects.get(id=coordinador_id)
+        coordinador.activo = False
+        coordinador.save()
+        mensaje = "Registro de coordinador desactivado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_coordinador.html', context)
+    except Coordinador.DoesNotExist:
+        mensaje = "El coordinador no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_coordinador.html', context)
