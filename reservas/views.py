@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from.models import Empleado, Cliente, Coordinador
 from .forms import EmpleadoForm, ClienteForm, CoordinadorForm
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -212,3 +214,13 @@ def modificar_coordinador(request, id):
 
     context = {'form': form}
     return render(request, 'modificar_coordinador.html', context)
+
+def activar_cliente(request, cliente_id):
+    try:
+        cliente = Cliente.objects.get(id=cliente_id)
+        cliente.activo = True
+        cliente.save()
+        messages.success(request, 'El cliente ha sido activado exitosamente.')
+        return redirect('/listar_clientes/')  
+    except Cliente.DoesNotExist:
+        return render(request, 'error.html')
