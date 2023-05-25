@@ -7,6 +7,9 @@ from django.contrib import messages
 
 # Create your views here.
 
+def inicio(request):
+    return render(request, 'index.html')
+
 #Vista para Registrar nuevo Empleados
 def crear_empleado(request):
     #Instancia de ProductoForm
