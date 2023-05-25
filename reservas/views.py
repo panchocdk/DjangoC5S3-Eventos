@@ -166,3 +166,15 @@ def crear_coordinador(request):
         'form':form
         }
     return render(request, 'crear_coordinador.html', context)
+
+
+#Vista para Listar a los Coordinadores
+def listar_coordinadores(request):
+    try:
+        coordinadores=Coordinador.objects.all()
+        context={
+            'coordinadores':coordinadores
+        }
+        return render(request,'listar_coordinadores.html', context)
+    except Exception:
+        return render(request, 'error.html')
