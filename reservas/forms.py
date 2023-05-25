@@ -1,5 +1,5 @@
 from django import forms
-from .models import Empleado, Cliente
+from .models import Empleado, Cliente, Coordinador, Cliente
 
 class EmpleadoForm(forms.ModelForm):
 
@@ -13,3 +13,9 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields ='nombre','apellido'
+
+class CoordinadorForm(forms.ModelForm):
+
+    class Meta:
+        model = Coordinador
+        fields = 'nombre','apellido','numero_documento','fecha_alta'
