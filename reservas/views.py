@@ -103,7 +103,20 @@ def crear_cliente(request):
         }
     return render(request, 'crear_cliente.html', context)
 
-
+ #vista activar_coordinador 
+def activar_coordinador(request, id):
+    try:
+        coordinador = Coordinador.objects.get(id=id)
+        coordinador.activo = True
+        coordinador.save()
+        mensaje = "Registro de coordinador activado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_coordinador.html', context)
+    except Coordinador.DoesNotExist:
+        mensaje = "El coordinador no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_coordinador.html', context)
+    
 #vista desactivar_cliente   
 def desactivar_cliente(request, id):
     try:
