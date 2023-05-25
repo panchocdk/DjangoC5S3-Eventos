@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from.models import Empleado
-from .forms import EmpleadoForm
+from.models import Empleado, Cliente, Coordinador
+from .forms import EmpleadoForm, ClienteForm
 
 # Create your views here.
 
@@ -80,3 +80,40 @@ def desactivar_empleado(request, id):
         mensaje = "El empleado no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_empleado.html', context)
+   
+
+#Vista para Registrar un nuevo Cliente
+
+def crear_cliente(request):
+    #Instancia de ClienteForm
+    form=ClienteForm()
+    if request.POST:
+        form=ClienteForm(request.POST)
+        if form.is_valid():
+            cliente=Cliente(
+                nombre=form.cleaned_data['nombre'],
+                apellido=form.cleaned_data['apellido'],
+            )
+            cliente.save()
+            return redirect('/listar_clientes/') #listar_clientes falta hacer
+        else:
+            return redirect('/listar_clientes/')
+    context={
+        'form':form
+        }
+    return render(request, 'crear_cliente.html', context)
+
+
+#vista desactivar_cliente   
+def desactivar_cliente(request, id):
+    try:
+        cliente = Cliente.objects.get(id=id)
+        cliente.activo = False
+        cliente.save()
+        mensaje = "Registro de cliente desactivado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_cliente.html', context)
+    except Empleado.DoesNotExist:
+        mensaje = "El cliente no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_cliente.html', context)
