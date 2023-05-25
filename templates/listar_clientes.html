@@ -1,0 +1,47 @@
+{% extends 'index.html'%}
+
+{% block content %}
+
+    <div class='container'>
+    
+        <h2>Lista de Clientes</h2>
+
+        <div class="form-group mb-2 col col-lg-6">
+        
+            <table class="center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Activo</th>
+                        <th>Acciones a realizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente.id }}</td>
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.apellido }}</td>
+                        <td>{{ cliente.activo }}</td>
+                        <td>
+                            <a href="{{ '/actualizar_cliente' }}/{{ cliente.id }}">Actualizar</a>
+                            {% if empleado.activo %}
+                                <a href="{{ '/desactivar_cliente' }}/{{ cliente.id }}">Desactivar</a>
+                            {% else %}
+                                <a href="{{ '/activar_cliente' }}/{{ cliente.id }}">Activar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+
+            <a href="{{ '/crear_cliente' }}" class="button">Registrar un Cliente</a>
+
+        </div>
+    </div>
+
+{% endblock %}
