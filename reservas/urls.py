@@ -12,4 +12,5 @@ urlpatterns = [
     path('activar_coordinador/<int:id>/', views.activar_coordinador, name='activar_coordinador'),
     path('desactivar_coordinador/<int:coordinador_id>/', views.desactivar_coordinador, name='desactivar_coordinador'),
     path('crear_coordinador/', views.crear_coordinador, name='crear_coordinador'),
+    path('listar_coordinadores/', views.listar_coordinadores, name='listar_coordinadores'),
 ]
