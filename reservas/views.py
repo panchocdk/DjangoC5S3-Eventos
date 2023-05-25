@@ -195,3 +195,20 @@ def actualizar_cliente(request, cliente_id):
         return render(request, 'actualizar_cliente.html', context)
     except Exception:
         return render(request, 'error.html')
+    
+def modificar_coordinador(request, id):
+    try:
+        coordinador = Coordinador.objects.get(id=id)
+    except Coordinador.DoesNotExist:
+        return redirect('/listar_coordinadores/')
+
+    if request.method == 'POST':
+        form = CoordinadorForm(request.POST, instance=coordinador)
+        if form.is_valid():
+            form.save()
+            return redirect('/listar_coordinadores/')
+    else:
+        form = CoordinadorForm(instance=coordinador)
+
+    context = {'form': form}
+    return render(request, 'modificar_coordinador.html', context)
