@@ -80,10 +80,8 @@ def desactivar_empleado(request, id):
         mensaje = "El empleado no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_empleado.html', context)
-
-
+      
 #Vista para Registrar un nuevo Cliente
-
 def crear_cliente(request):
     #Instancia de ClienteForm
     form=ClienteForm()
@@ -102,7 +100,7 @@ def crear_cliente(request):
         'form':form
         }
     return render(request, 'crear_cliente.html', context)
-  
+
  #vista activar_coordinador 
 def activar_coordinador(request, id):
     try:
@@ -116,3 +114,18 @@ def activar_coordinador(request, id):
         mensaje = "El coordinador no existe."
         context = {'mensaje': mensaje}
         return render(request, 'activar_coordinador.html', context)
+    
+#vista desactivar_cliente   
+def desactivar_cliente(request, id):
+    try:
+        cliente = Cliente.objects.get(id=id)
+        cliente.activo = False
+        cliente.save()
+        mensaje = "Registro de cliente desactivado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_cliente.html', context)
+    except Empleado.DoesNotExist:
+        mensaje = "El cliente no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_cliente.html', context)
+
