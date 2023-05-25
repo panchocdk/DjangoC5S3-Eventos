@@ -102,7 +102,7 @@ def crear_cliente(request):
         'form':form
         }
     return render(request, 'crear_cliente.html', context)
-
+  
  #vista activar_coordinador 
 def activar_coordinador(request, id):
     try:
