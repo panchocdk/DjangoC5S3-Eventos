@@ -80,10 +80,8 @@ def desactivar_empleado(request, id):
         mensaje = "El empleado no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_empleado.html', context)
-   
-
+      
 #Vista para Registrar un nuevo Cliente
-
 def crear_cliente(request):
     #Instancia de ClienteForm
     form=ClienteForm()
@@ -130,3 +128,4 @@ def desactivar_cliente(request, id):
         mensaje = "El cliente no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_cliente.html', context)
+
