@@ -1,27 +1,22 @@
 {% extends 'index.html' %}
 
 {% block content %}
+
     <div class="container">
-        <h3>Registrar un empleado</h3>
+
+        <h2>Registrar un empleado</h2>
+
         <form action="" method="post">
+
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             
-            <div class="form-group">
-                <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
-                {{ form.nombre }}
-            </div>
+            {{ form.as_p() }}
             
-            <div class="form-group">
-                <label for="{{ form.apellido.id_for_label }}">Apellido:</label>
-                {{ form.apellido }}
-            </div>
+            <br>
+            <br>
             
-            <div class="form-group">
-                <label for="{{ form.numero_legajo.id_for_label }}">Legajo:</label>
-                {{ form.numero_legajo }}
-            </div>
-            
-            <button class="btn btn-actualizar" style="background-color: #00ff00;" onclick="location.href='/crear_empleado'">Registrar</button>
+            <button type="submit" class="button">Registrar</button>
         </form>
+        
     </div>
 {% endblock %}
