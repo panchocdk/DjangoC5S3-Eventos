@@ -249,20 +249,3 @@ def desactivar_coordinador(request, coordinador_id):
         mensaje = "El coordinador no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_coordinador.html', context)
-   
-# def modificar_coordinador(request, id):
-#     try:
-#         coordinador = Coordinador.objects.get(id=id)
-#     except Coordinador.DoesNotExist:
-#         return redirect('/listar_coordinadores/')
-
-#     if request.method == 'POST':
-#         form = CoordinadorForm(request.POST, instance=coordinador)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/listar_coordinadores/')
-#     else:
-#         form = CoordinadorForm(instance=coordinador)
-
-#     context = {'form': form}
-#     return render(request, 'modificar_coordinador.html', context)
