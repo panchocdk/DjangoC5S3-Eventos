@@ -10,6 +10,10 @@ from django.contrib import messages
 def inicio(request):
     return render(request, 'index.html')
 
+
+#-----------------------EMPLEADOS-----------------------------------------------------------------
+ 
+
 #Vista para Registrar nuevo Empleados
 def crear_empleado(request):
     #Instancia de ProductoForm
@@ -85,7 +89,11 @@ def desactivar_empleado(request, id):
         mensaje = "El empleado no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_empleado.html', context)
-      
+
+
+#-------------------------CLIENTES-----------------------------------------------------------------------------------
+
+
 #Vista para Registrar un nuevo Cliente
 def crear_cliente(request):
     #Instancia de ClienteForm
@@ -106,20 +114,47 @@ def crear_cliente(request):
         }
     return render(request, 'crear_cliente.html', context)
 
- #vista activar_coordinador 
-def activar_coordinador(request, id):
+#Vista para Actualizar un Cliente
+def actualizar_cliente(request, cliente_id):
     try:
-        coordinador = Coordinador.objects.get(id=id)
-        coordinador.activo = True
-        coordinador.save()
-        mensaje = "Registro de coordinador activado correctamente."
+        cliente = Cliente.objects.get(id=cliente_id)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST, instance=cliente)
+            if form.is_valid():
+                form.save()
+            return redirect('/listar_clientes/')
+        else:
+            form = ClienteForm(instance=cliente)
+        context = {'form': form}
+        return render(request, 'actualizar_cliente.html', context)
+    except Exception:
+        return render(request, 'error.html')
+
+#Vista para Listar a los Clientes     
+def listar_clientes(request):
+    try:
+        clientes = Cliente.objects.all()
+        context = {
+            'clientes': clientes
+        }
+        return render(request, 'listar_clientes.html', context)
+    except Exception:
+        return render(request, 'error.html')
+
+#vista activar cliente
+def activar_cliente(request, cliente_id):
+    try:
+        cliente = Cliente.objects.get(id=cliente_id)
+        cliente.activo = True
+        cliente.save()
+        mensaje = "Registro de cliente activado correctamente."
         context = {'mensaje': mensaje}
-        return render(request, 'activar_coordinador.html', context)
-    except Coordinador.DoesNotExist:
-        mensaje = "El coordinador no existe."
+        return render(request, 'activar_cliente.html', context)
+    except Cliente.DoesNotExist:
+        mensaje = "El cliente no existe."
         context = {'mensaje': mensaje}
-        return render(request, 'activar_coordinador.html', context)
-    
+        return render(request, 'activar_cliente.html', context)
+
 #vista desactivar_cliente   
 def desactivar_cliente(request, id):
     try:
@@ -135,20 +170,8 @@ def desactivar_cliente(request, id):
         return render(request, 'desactivar_cliente.html', context)
 
 
-#Vista para Desactivar un Coordinador   
-def desactivar_coordinador(request, coordinador_id):
-    try:
-        coordinador = Coordinador.objects.get(id=coordinador_id)
-        coordinador.activo = False
-        coordinador.save()
-        mensaje = "Registro de coordinador desactivado correctamente."
-        context = {'mensaje': mensaje}
-        return render(request, 'desactivar_coordinador.html', context)
-    except Coordinador.DoesNotExist:
-        mensaje = "El coordinador no existe."
-        context = {'mensaje': mensaje}
-        return render(request, 'desactivar_coordinador.html', context)
-    
+#-----------------------COORDINADORES----------------------------------------------------------------------------
+
 
 #Vista para Registrar nuevos Coordinadores
 def crear_coordinador(request):
@@ -172,67 +195,7 @@ def crear_coordinador(request):
     context = {'form': form}
     return render(request, 'crear_coordinador.html', context)
 
-
-#Vista para Listar a los Coordinadores
-def listar_coordinadores(request):
-    try:
-        coordinadores=Coordinador.objects.all()
-        context={
-            'coordinadores':coordinadores
-        }
-        return render(request,'listar_coordinadores.html', context)
-    except Exception:
-        return render(request, 'error.html')
-    
-
-#Vista para Actualizar un Cliente
-def actualizar_cliente(request, cliente_id):
-    try:
-        cliente = Cliente.objects.get(id=cliente_id)
-        if request.method == 'POST':
-            form = ClienteForm(request.POST, instance=cliente)
-            if form.is_valid():
-                form.save()
-            return redirect('/listar_clientes/')
-        else:
-            form = ClienteForm(instance=cliente)
-        context = {'form': form}
-        return render(request, 'actualizar_cliente.html', context)
-    except Exception:
-        return render(request, 'error.html')
-    
-def modificar_coordinador(request, id):
-    try:
-        coordinador = Coordinador.objects.get(id=id)
-    except Coordinador.DoesNotExist:
-        return redirect('/listar_coordinadores/')
-
-    if request.method == 'POST':
-        form = CoordinadorForm(request.POST, instance=coordinador)
-        if form.is_valid():
-            form.save()
-            return redirect('/listar_coordinadores/')
-    else:
-        form = CoordinadorForm(instance=coordinador)
-
-    context = {'form': form}
-    return render(request, 'modificar_coordinador.html', context)
-
-def activar_cliente(request, cliente_id):
-    try:
-        cliente = Cliente.objects.get(id=cliente_id)
-        cliente.activo = True
-        cliente.save()
-        messages.success(request, 'El cliente ha sido activado exitosamente.')
-        return redirect('/listar_clientes/')  
-    except Cliente.DoesNotExist:
-        return render(request, 'error.html')
-    
-def listar_clientes(request):
-    clientes = Cliente.objects.all()
-    context = {'clientes': clientes}
-    return render(request, 'listar_clientes.html', context)
-
+#Vista para actualizar un Coordinador
 def actualizar_coordinador(request, coordinador_id):
     try:
         coordinador = Coordinador.objects.get(id=coordinador_id)
@@ -247,3 +210,42 @@ def actualizar_coordinador(request, coordinador_id):
         return render(request, 'actualizar_coordinador.html', context)
     except Exception:
         return render(request, 'error.html')
+    
+#Vista para Listar a los Coordinadores
+def listar_coordinadores(request):
+    try:
+        coordinadores=Coordinador.objects.all()
+        context={
+            'coordinadores':coordinadores
+        }
+        return render(request,'listar_coordinadores.html', context)
+    except Exception:
+        return render(request, 'error.html')
+
+ #vista activar_coordinador 
+def activar_coordinador(request, id):
+    try:
+        coordinador = Coordinador.objects.get(id=id)
+        coordinador.activo = True
+        coordinador.save()
+        mensaje = "Registro de coordinador activado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_coordinador.html', context)
+    except Coordinador.DoesNotExist:
+        mensaje = "El coordinador no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_coordinador.html', context)
+
+#Vista para Desactivar un Coordinador   
+def desactivar_coordinador(request, coordinador_id):
+    try:
+        coordinador = Coordinador.objects.get(id=coordinador_id)
+        coordinador.activo = False
+        coordinador.save()
+        mensaje = "Registro de coordinador desactivado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_coordinador.html', context)
+    except Coordinador.DoesNotExist:
+        mensaje = "El coordinador no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_coordinador.html', context)

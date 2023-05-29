@@ -11,8 +11,8 @@
 
     {% for field in form %}
       {% if field.name == 'fecha_alta' %}
-        <div class="field-wrapper">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="field-wrapper"  style="padding: 10px;">
+          <label for="{{ field.id_for_label }}" >{{ field.label }}</label>
           <input type="datetime-local" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default('') }}" required>
           {% if field.errors %}
             <ul class="errorlist">
@@ -23,7 +23,7 @@
           {% endif %}
         </div>
       {% else %}
-        <div class="field-wrapper">
+        <div class="field-wrapper" style="padding: 10px;">
           <label for="{{ field.id_for_label }}">{{ field.label }}</label>
           {{ field }}
           {% if field.errors %}
@@ -40,8 +40,7 @@
     <br>
     <br>
 
-    <button type="submit">Guardar</button>
-
+    <button type="submit" class="button">Registrar</button>
   </form>
 
 </div>

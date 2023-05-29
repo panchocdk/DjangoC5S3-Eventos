@@ -40,39 +40,15 @@
         background-color: #0069d9;
         border-color: #0062cc;
     }
-    .button-employees {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-    .button-employees:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
-    }
-    .button-clients {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-    .button-clients:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
-    }
-    .button-coordinators {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-    .button-coordinators:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
-    }
 </style>
 <body>
     <div>
         <h1>PARA GESTION DE PRUEBAS</h1>
-        <ul>
-            <li><a href="/listar_empleados/" class="button button-employees">Empleados</a></li>
-            <li><a href="/listar_clientes/" class="button button-clients">Clientes</a></li>
-            <li><a href="/listar_coordinadores/" class="button button-coordinators">Coordinadores</a></li>
-        </ul>
+
+            <a href="/listar_empleados/" class="button">Empleados</a></li>
+            <a href="/listar_clientes/" class="button">Clientes</a></li>
+            <a href="/listar_coordinadores/" class="button">Coordinadores</a></li>
+
     </div>
     {% block content %}
     {% endblock %}
