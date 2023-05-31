@@ -1,5 +1,5 @@
 from django import forms
-from .models import Empleado, Cliente, Coordinador, Servicio
+from .models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio
 
 class EmpleadoForm(forms.ModelForm):
 
@@ -25,3 +25,8 @@ class ServicioForm(forms.ModelForm):
     class Meta:
         model = Servicio
         fields = 'nombre','descripcion','precio'
+
+class ReservaDeServicioForm(forms.ModelForm):
+    class Meta:
+        model = ReservaDeServicio
+        fields = ['fecha_creacion', 'fecha_reserva', 'cliente', 'responsable', 'empleado', 'servicio', 'precio']
