@@ -43,15 +43,6 @@
                 {% endif %}
             </div>
             
-            <div class="form-group">
-                <label>Fecha de Alta:</label>
-                {% if coordinador %}
-                    <p>{{ coordinador.fecha_alta|date('%d/%m/%Y %H:%M') }}</p>
-                {% else %}
-                    <p>Sin fecha de alta</p>
-                {% endif %}
-            </div>
-            
             <button class="btn btn-actualizar" style="background-color: #007bff;">Guardar</button>
         </form>
     </div>
