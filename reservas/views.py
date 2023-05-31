@@ -346,3 +346,16 @@ def crear_servicio(request):
         'form':form
         }
     return render(request, 'crear_servicio.html', context)
+
+#view para desactivar servicios
+def desactivar_servicio(request, id):
+    try:
+        servicio = Servicio.objects.get(id=id)
+        servicio.activo = False
+        servicio.save()
+        mensaje = f"El servicio '{servicio.nombre}' ha sido desactivado correctamente."
+        messages.success(request, mensaje)
+    except Servicio.DoesNotExist:
+        messages.error(request, 'El servicio no existe.')
+    
+    return redirect('listar_servicios.html')
