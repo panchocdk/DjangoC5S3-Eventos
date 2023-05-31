@@ -294,3 +294,18 @@ def registrar_reserva(request):
     
     context = {'form': form}
     return render(request, 'registrar_reserva.html', context)
+
+def eliminar_reserva(request, id):
+    try:
+        reserva = ReservaDeServicio.objects.get(id=id)
+    except ReservaDeServicio.DoesNotExist:
+        messages.error(request, 'La reserva no existe.')
+        return redirect('listar_reservas')  
+    
+    if request.method == 'POST':
+        reserva.delete()
+        messages.success(request, 'La reserva se ha eliminado correctamente.')
+        return redirect('listar_reservas')  
+    
+    context = {'reserva': reserva}
+    return render(request, 'eliminar_reserva.html', context)
