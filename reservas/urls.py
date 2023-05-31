@@ -21,4 +21,6 @@ urlpatterns = [
     path('listar_coordinadores/', views.listar_coordinadores, name='listar_coordinadores'),
     path('activar_coordinador/<int:id>/', views.activar_coordinador, name='activar_coordinador'),
     path('desactivar_coordinador/<int:coordinador_id>/', views.desactivar_coordinador, name='desactivar_coordinador'),
+    #---------------------------------------------------------------------------------------------
+    path('actualizar_servicio/<int:servicio_id>/', views.actualizar_servicio, name='actualizar_servicio'),
 ]
