@@ -269,3 +269,15 @@ def actualizar_servicio(request, servicio_id):
         return render(request, 'actualizar_servicio.html', context)   #falta template
     except Exception:
         return render(request, 'error.html')
+    
+def activar_servicio(request, id):
+    try:
+        servicio = Servicio.objects.get(id=id)
+        servicio.activo = True
+        servicio.save()
+        mensaje = f"El servicio '{servicio.nombre}' ha sido activado correctamente."
+        messages.success(request, mensaje)
+    except Servicio.DoesNotExist:
+        messages.error(request, 'El servicio no existe.')
+    
+    return redirect('listar_servicios.html')
