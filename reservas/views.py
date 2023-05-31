@@ -325,3 +325,24 @@ def ver_servicio(request, id):
         data = {}  
     
     return JsonResponse(data)
+    
+#vista para registrar servicios 
+def crear_servicio(request):
+    #Instancia de ProductoForm
+    form=ServicioForm()
+    if request.POST:
+        form=ServicioForm(request.POST)
+        if form.is_valid():
+            servicio=Servicio(
+                nombre=form.cleaned_data['nombre'],
+                descripcion=form.cleaned_data['descripcion'],
+                precio=form.cleaned_data['precio'],    
+            )
+            servicio.save()
+            return redirect('/listar_servicios/')
+        else:
+            return redirect('/listar_servicios/')
+    context={
+        'form':form
+        }
+    return render(request, 'crear_servicio.html', context)
