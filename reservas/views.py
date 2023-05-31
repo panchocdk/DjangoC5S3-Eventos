@@ -4,6 +4,7 @@ from.models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio
 from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm, ReservaDeServicioForm
 from django.contrib import messages
 from datetime import datetime
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -309,3 +310,18 @@ def eliminar_reserva(request, id):
     
     context = {'reserva': reserva}
     return render(request, 'eliminar_reserva.html', context)
+
+
+def ver_servicio(request, id):
+    try:
+        servicio = Servicio.objects.get(id=id)
+        data = {
+            'id': servicio.id,
+            'nombre': servicio.nombre,
+            'descripcion': servicio.descripcion,
+            'precio': servicio.precio,
+        }
+    except Servicio.DoesNotExist:
+        data = {}  
+    
+    return JsonResponse(data)

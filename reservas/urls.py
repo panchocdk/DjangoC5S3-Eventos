@@ -28,5 +28,9 @@ urlpatterns = [
     #---------------------------------------------------------------------------------------------
     path('registrar_reserva', views.registrar_reserva, name='registrar_reserva'),
     path('eliminar_reserva/<int:id>/', views.eliminar_reserva, name='eliminar_reserva'),
+    
+
+    #---------------------------------------------------------------------------------------------
+    path('ver_servicio/<int:id>/', views.ver_servicio, name='ver_servicio'),
 ]
 
