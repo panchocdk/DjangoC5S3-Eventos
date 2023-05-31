@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from.models import Empleado, Cliente, Coordinador
-from .forms import EmpleadoForm, ClienteForm, CoordinadorForm
+from.models import Empleado, Cliente, Coordinador, Servicio
+from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm
 from django.contrib import messages
 from datetime import datetime
 
@@ -252,3 +252,20 @@ def desactivar_coordinador(request, coordinador_id):
         mensaje = "El coordinador no existe."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_coordinador.html', context)
+    
+
+#Vista para actualizar un Servicio
+def actualizar_servicio(request, servicio_id):
+    try:
+        servicio = Servicio.objects.get(id=servicio_id)
+        if request.method == 'POST':
+            form = ServicioForm(request.POST, instance=servicio)
+            if form.is_valid():
+                form.save()
+                return redirect('/listar_servicios/') #falta listado
+        else:
+            form = ServicioForm(instance=servicio)
+        context = {'form': form}
+        return render(request, 'actualizar_servicio.html', context)   #falta template
+    except Exception:
+        return render(request, 'error.html')
