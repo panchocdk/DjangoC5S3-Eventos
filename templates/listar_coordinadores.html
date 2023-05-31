@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container">
-  <h1>Listado de Coordinadores</h1>
+  <h2>Listado de Coordinadores</h2>
 
-  <table>
+  <table class="center">
     <thead>
       <tr>
         <th>ID</th>
@@ -12,6 +12,8 @@
         <th>Apellido</th>
         <th>Número de Documento</th>
         <th>Fecha de Alta</th>
+        <th>Activo</th>
+        <th>Acciones a realizar</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +24,7 @@
           <td>{{ coordinador.apellido }}</td>
           <td>{{ coordinador.numero_documento }}</td>
           <td>{{ coordinador.fecha_alta }}</td>
+          <td>{{ coordinador.activo }}</td>
           <td>
             <a href="{{ '/actualizar_coordinador' }}/{{ coordinador.id }}">Actualizar</a>
             {% if coordinador.activo %}
