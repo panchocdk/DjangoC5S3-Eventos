@@ -328,7 +328,7 @@ def ver_servicio(request, id):
     
 #vista para registrar servicios 
 def crear_servicio(request):
-    #Instancia de ProductoForm
+    #Instancia de ServicioForm
     form=ServicioForm()
     if request.POST:
         form=ServicioForm(request.POST)
@@ -354,8 +354,20 @@ def desactivar_servicio(request, id):
         servicio.activo = False
         servicio.save()
         mensaje = f"El servicio '{servicio.nombre}' ha sido desactivado correctamente."
-        messages.success(request, mensaje)
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_servicio.html', context)
     except Servicio.DoesNotExist:
-        messages.error(request, 'El servicio no existe.')
-    
-    return redirect('listar_servicios.html')
+        mensaje = "El servicio ingresado no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_servicio.html', context)
+
+#view para el listado de servicios
+def listar_servicios(request):
+    try:
+        servicios=Servicio.objects.all()
+        context={
+            'servicios':servicios
+        }
+        return render(request,'listar_servicios.html', context)
+    except Exception:
+        return render(request, 'error.html')
