@@ -19,11 +19,12 @@ class Coordinador(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     numero_documento = models.IntegerField(unique=True, blank=False)
-    fecha_alta = models.DateTimeField()
+    fecha_alta = models.DateTimeField(auto_now_add=True)
     activo = models.BooleanField(default=True)
 
     def __str__(self):
         return str(self.nombre+' '+self.apellido)
+    
     
 #Modelo de Cliente
 class Cliente(models.Model):

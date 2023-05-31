@@ -1,48 +1,57 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="container">
-
-  <h2>Crear Coordinador</h2>
-
-  <form action="" method="post">
-
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
-
-    {% for field in form %}
-      {% if field.name == 'fecha_alta' %}
-        <div class="field-wrapper">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          <input type="datetime-local" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default('') }}" required>
-          {% if field.errors %}
-            <ul class="errorlist">
-              {% for error in field.errors %}
-                <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      {% else %}
-        <div class="field-wrapper">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-          {% if field.errors %}
-            <ul class="errorlist">
-              {% for error in field.errors %}
-                <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endfor %}
-
-    <br>
-    <br>
-
-    <button type="submit">Guardar</button>
-
-  </form>
-
-</div>
+    <div class="container">
+        <h2>Crear Coordinador</h2>
+        <form action="" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+            
+            <div class="form-group">
+                <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.nombre.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.apellido.id_for_label }}">Apellido:</label>
+                {{ form.apellido }}
+                {% if form.apellido.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.apellido.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.numero_documento.id_for_label }}">Número de Documento:</label>
+                {{ form.numero_documento }}
+                {% if form.numero_documento.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.numero_documento.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label>Fecha de Alta:</label>
+                {% if coordinador %}
+                    <p>{{ coordinador.fecha_alta|date('%d/%m/%Y %H:%M') }}</p>
+                {% else %}
+                    <p>Sin fecha de alta</p>
+                {% endif %}
+            </div>
+            
+            <button class="btn btn-actualizar" style="background-color: #007bff;">Guardar</button>
+        </form>
+    </div>
 {% endblock %}

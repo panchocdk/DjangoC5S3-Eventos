@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from.models import Empleado, Cliente, Coordinador
 from .forms import EmpleadoForm, ClienteForm, CoordinadorForm
 from django.contrib import messages
+from datetime import datetime
 
 
 # Create your views here.
@@ -160,7 +161,9 @@ def crear_coordinador(request):
             if Coordinador.objects.filter(numero_documento=numero_documento).exists():
                 messages.error(request, 'El número de documento ya está en uso.')
             else:
-                coordinador = form.save()
+                coordinador = form.save(commit=False)
+                coordinador.fecha_alta = datetime.now()  # Establecer la fecha de alta automáticamente
+                coordinador.save()
                 messages.success(request, 'El coordinador se creó correctamente.')
                 return redirect('/listar_coordinadores/')
         else:
