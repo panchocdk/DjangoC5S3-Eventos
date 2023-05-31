@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from.models import Empleado, Cliente, Coordinador, Servicio
-from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm
+from.models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio
+from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm, ReservaDeServicioForm
 from django.contrib import messages
 from datetime import datetime
 
@@ -269,3 +269,28 @@ def actualizar_servicio(request, servicio_id):
         return render(request, 'actualizar_servicio.html', context)   #falta template
     except Exception:
         return render(request, 'error.html')
+    
+def activar_servicio(request, id):
+    try:
+        servicio = Servicio.objects.get(id=id)
+        servicio.activo = True
+        servicio.save()
+        mensaje = f"El servicio '{servicio.nombre}' ha sido activado correctamente."
+        messages.success(request, mensaje)
+    except Servicio.DoesNotExist:
+        messages.error(request, 'El servicio no existe.')
+    
+    return redirect('listar_servicios.html')
+
+
+def registrar_reserva(request):
+    if request.method == 'POST':
+        form = ReservaDeServicioForm(request.POST)
+        if form.is_valid():
+            reserva = form.save()  
+            return redirect('listar_reservas')  
+    else:
+        form = ReservaDeServicioForm()
+    
+    context = {'form': form}
+    return render(request, 'registrar_reserva.html', context)
