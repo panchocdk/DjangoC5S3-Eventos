@@ -24,7 +24,13 @@
           <td>{{ coordinador.apellido }}</td>
           <td>{{ coordinador.numero_documento }}</td>
           <td>{{ coordinador.fecha_alta.strftime('%Y-%m-%d %H:%M') }}</td>
-          <td>{{ coordinador.activo }}</td>
+          <td>
+            {% if coordinador.activo %}
+              {{ 'Si' }}
+            {% else %}
+              {{ 'No' }}
+            {% endif %}
+          </td>
           <td>
             <a href="{{ '/actualizar_coordinador' }}/{{ coordinador.id }}">Actualizar</a>
             {% if coordinador.activo %}

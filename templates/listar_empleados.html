@@ -26,7 +26,13 @@
                         <td>{{ empleado.nombre }}</td>
                         <td>{{ empleado.apellido }}</td>
                         <td>{{ empleado.numero_legajo }}</td>
-                        <td>{{ empleado.activo }}</td>
+                        <td>
+                            {% if empleado.activo %}
+                                {{ 'Si' }}
+                            {% else %}
+                                {{ 'No' }}
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="{{ '/actualizar_empleado' }}/{{ empleado.id }}">Actualizar</a>
                             {% if empleado.activo %}

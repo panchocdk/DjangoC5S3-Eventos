@@ -20,7 +20,13 @@
                     <td>{{ cliente.id }}</td>
                     <td>{{ cliente.nombre }}</td>
                     <td>{{ cliente.apellido }}</td>
-                    <td>{{ cliente.activo }}</td>
+                    <td>
+                        {% if cliente.activo %}
+                            {{ 'Si' }}
+                        {% else %}
+                            {{ 'No' }}
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{{ '/actualizar_cliente' }}/{{ cliente.id }}">Actualizar</a>
                         {% if cliente.activo %}

@@ -26,7 +26,13 @@
                         <td>{{ servicio.nombre }}</td>
                         <td>{{ servicio.descripcion }}</td>
                         <td>{{ servicio.precio }}</td>
-                        <td>{{ servicio.activo }}</td>
+                        <td>
+                            {% if servicio.activo %}
+                                {{ 'Si' }}
+                            {% else %}
+                                {{ 'No' }}
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="{{ '/actualizar_servicio' }}/{{ servicio.id }}">Actualizar</a>
                             {% if servicio.activo %}

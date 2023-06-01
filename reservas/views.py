@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from.models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio
 from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm, ReservaDeServicioForm
 from django.contrib import messages
-from datetime import datetime
-from django.http import JsonResponse
 
 
 # Create your views here.
@@ -186,7 +183,6 @@ def crear_coordinador(request):
                 messages.error(request, 'El número de documento ya está en uso.')
             else:
                 coordinador = form.save(commit=False)
-                coordinador.fecha_alta = datetime.now()  # Establecer la fecha de alta automáticamente
                 coordinador.save()
                 messages.success(request, 'El coordinador se creó correctamente.')
                 return redirect('/listar_coordinadores/')
@@ -226,7 +222,7 @@ def listar_coordinadores(request):
     except Exception:
         return render(request, 'error.html')
 
- #vista activar_coordinador 
+#vista activar_coordinador 
 def activar_coordinador(request, id):
     try:
         coordinador = Coordinador.objects.get(id=id)
@@ -255,6 +251,30 @@ def desactivar_coordinador(request, coordinador_id):
         return render(request, 'desactivar_coordinador.html', context)
     
 
+#------------------SERVICIOS----------------------------------------------------------------------------------
+
+
+#vista para registrar servicios 
+def crear_servicio(request):
+    #Instancia de ServicioForm
+    form=ServicioForm()
+    if request.POST:
+        form=ServicioForm(request.POST)
+        if form.is_valid():
+            servicio=Servicio(
+                nombre=form.cleaned_data['nombre'],
+                descripcion=form.cleaned_data['descripcion'],
+                precio=form.cleaned_data['precio'],    
+            )
+            servicio.save()
+            return redirect('/listar_servicios/')
+        else:
+            return redirect('/listar_servicios/')
+    context={
+        'form':form
+        }
+    return render(request, 'crear_servicio.html', context)
+
 #Vista para actualizar un Servicio
 def actualizar_servicio(request, servicio_id):
     try:
@@ -263,26 +283,56 @@ def actualizar_servicio(request, servicio_id):
             form = ServicioForm(request.POST, instance=servicio)
             if form.is_valid():
                 form.save()
-                return redirect('/listar_servicios/') #falta listado
+                return redirect('/listar_servicios/')
         else:
             form = ServicioForm(instance=servicio)
         context = {'form': form}
-        return render(request, 'actualizar_servicio.html', context)   #falta template
+        return render(request, 'actualizar_servicio.html', context)
     except Exception:
         return render(request, 'error.html')
     
+#view para el listado de servicios
+def listar_servicios(request):
+    try:
+        servicios=Servicio.objects.all()
+        context={
+            'servicios':servicios
+        }
+        return render(request,'listar_servicios.html', context)
+    except Exception:
+        return render(request, 'error.html')
+    
+#Vista para activar un servicio
 def activar_servicio(request, id):
     try:
         servicio = Servicio.objects.get(id=id)
         servicio.activo = True
         servicio.save()
-        mensaje = f"El servicio '{servicio.nombre}' ha sido activado correctamente."
-        messages.success(request, mensaje)
+        mensaje = "Registro de servicio activado correctamente."
+        context = {'mensaje':mensaje}
+        return render(request, 'activar_servicio.html', context)
     except Servicio.DoesNotExist:
-        messages.error(request, 'El servicio no existe.')
+        mensaje = "El servicio no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'activar_servicio.html', context)
     
-    return redirect('listar_servicios.html')
+#view para desactivar servicios
+def desactivar_servicio(request, id):
+    try:
+        servicio = Servicio.objects.get(id=id)
+        servicio.activo = False
+        servicio.save()
+        mensaje = "Registro de servicio desactivado correctamente."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_servicio.html', context)
+    except Servicio.DoesNotExist:
+        mensaje = "El servicio no existe."
+        context = {'mensaje': mensaje}
+        return render(request, 'desactivar_servicio.html', context)
+    
 
+#---------------------------------------------------------------------------------------------------------------
+    
 
 def registrar_reserva(request):
     if request.method == 'POST':
@@ -310,64 +360,3 @@ def eliminar_reserva(request, id):
     
     context = {'reserva': reserva}
     return render(request, 'eliminar_reserva.html', context)
-
-
-def ver_servicio(request, id):
-    try:
-        servicio = Servicio.objects.get(id=id)
-        data = {
-            'id': servicio.id,
-            'nombre': servicio.nombre,
-            'descripcion': servicio.descripcion,
-            'precio': servicio.precio,
-        }
-    except Servicio.DoesNotExist:
-        data = {}  
-    
-    return JsonResponse(data)
-    
-#vista para registrar servicios 
-def crear_servicio(request):
-    #Instancia de ServicioForm
-    form=ServicioForm()
-    if request.POST:
-        form=ServicioForm(request.POST)
-        if form.is_valid():
-            servicio=Servicio(
-                nombre=form.cleaned_data['nombre'],
-                descripcion=form.cleaned_data['descripcion'],
-                precio=form.cleaned_data['precio'],    
-            )
-            servicio.save()
-            return redirect('/listar_servicios/')
-        else:
-            return redirect('/listar_servicios/')
-    context={
-        'form':form
-        }
-    return render(request, 'crear_servicio.html', context)
-
-#view para desactivar servicios
-def desactivar_servicio(request, id):
-    try:
-        servicio = Servicio.objects.get(id=id)
-        servicio.activo = False
-        servicio.save()
-        mensaje = f"El servicio '{servicio.nombre}' ha sido desactivado correctamente."
-        context = {'mensaje': mensaje}
-        return render(request, 'desactivar_servicio.html', context)
-    except Servicio.DoesNotExist:
-        mensaje = "El servicio ingresado no existe."
-        context = {'mensaje': mensaje}
-        return render(request, 'desactivar_servicio.html', context)
-
-#view para el listado de servicios
-def listar_servicios(request):
-    try:
-        servicios=Servicio.objects.all()
-        context={
-            'servicios':servicios
-        }
-        return render(request,'listar_servicios.html', context)
-    except Exception:
-        return render(request, 'error.html')
