@@ -21,19 +21,14 @@ urlpatterns = [
     path('listar_coordinadores/', views.listar_coordinadores, name='listar_coordinadores'),
     path('activar_coordinador/<int:id>/', views.activar_coordinador, name='activar_coordinador'),
     path('desactivar_coordinador/<int:coordinador_id>/', views.desactivar_coordinador, name='desactivar_coordinador'),
-    #---------------------------------------------------------------------------------------------
+    #--------------SERVICIOS------------------------------------------------------------------------------------
     path('crear_servicio/', views.crear_servicio, name='crear_servicio'),
     path('actualizar_servicio/<int:servicio_id>/', views.actualizar_servicio, name='actualizar_servicio'),
+    path('listar_servicios/', views.listar_servicios, name='listar_servicios'),
     path('activar_servicio/<int:id>/', views.activar_servicio, name='activar_servicio'),
     path('desactivar_servicio/<int:id>/', views.desactivar_servicio, name='desactivar_servicio'),
-    path('listar_servicios/', views.listar_servicios, name='listar_servicios'),
-
     #---------------------------------------------------------------------------------------------
-    path('registrar_reserva', views.registrar_reserva, name='registrar_reserva'),
+    path('registrar_reserva/', views.registrar_reserva, name='registrar_reserva'),
     path('eliminar_reserva/<int:id>/', views.eliminar_reserva, name='eliminar_reserva'),
-    
-
-    #---------------------------------------------------------------------------------------------
-    path('ver_servicio/<int:id>/', views.ver_servicio, name='ver_servicio'),
 ]
 
