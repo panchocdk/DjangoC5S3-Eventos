@@ -1,0 +1,51 @@
+{% extends 'index.html'%}
+
+{% block content %}
+
+    <div class='container'>
+    
+        <h2>Lista de Reservas de Servicios</h2>
+
+        <div class="form-group mb-2 col col-lg-6">
+        
+            <table class="center">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha de Creación</th>
+                        <th>Fecha de Reserva</th>
+                        <th>Cliente</th>
+                        <th>Responsable</th>
+                        <th>Empleado</th>
+                        <th>Servicio</th>
+                        <th>Precio</th>
+                        <th>Acciones a realizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ reserva.id }}</td>
+                        <td>{{ reserva.fecha_creacion }}</td>
+                        <td>{{ reserva.fecha_reserva }}</td>
+                        <td>{{ reserva.cliente }}</td>
+                        <td>{{ reserva.responsable }}</td>
+                        <td>{{ reserva.empleado }}</td>
+                        <td>{{ reserva.servicio }}</td>
+                        <td>{{ reserva.precio }}</td>
+                        <td>
+                            <a href="{{ '/actualizar_reserva' }}/{{ reserva.id }}">Actualizar</a>
+                            <a href="{{ '/eliminar_reserva' }}/{{ reserva.id }}">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+
+            <a href="{{ '/registrar_reserva' }}" class="button">Registrar una Reserva</a>
+
+        </div>
+    </div>
+
+{% endblock %}
