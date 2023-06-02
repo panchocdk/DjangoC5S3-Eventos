@@ -376,3 +376,14 @@ def actualizar_reserva(request, reserva_id):
         return render(request, 'actualizar_reserva.html', context)
     except Exception:
         return render(request, 'error.html')
+
+#Vista para el listado de Reservas de Servicios
+def listar_reservas(request):
+    try:
+        reservas=ReservaDeServicio.objects.all()
+        context={
+            'reservas':reservas
+        }
+        return render(request,'listar_reservas.html', context)
+    except Exception:
+        return render(request, 'error.html')
