@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from.models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio
 from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm, ReservaDeServicioForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -330,6 +331,20 @@ def desactivar_servicio(request, id):
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_servicio.html', context)
     
+def ver_servicio(request, id):
+    try:
+        servicio = Servicio.objects.get(id=id)
+        data = {
+            'id': servicio.id,
+            'nombre': servicio.nombre,
+            'descripcion': servicio.descripcion,
+            'precio': servicio.precio,
+        }
+    except Servicio.DoesNotExist:
+        data = {}  
+    
+    return JsonResponse(data)
+    
 
 #---------------------------------------------------------------------------------------------------------------
     
@@ -338,7 +353,7 @@ def registrar_reserva(request):
     if request.method == 'POST':
         form = ReservaDeServicioForm(request.POST)
         if form.is_valid():
-            reserva = form.save()  
+            form.save()  
             return redirect('listar_reservas')  
     else:
         form = ReservaDeServicioForm()
