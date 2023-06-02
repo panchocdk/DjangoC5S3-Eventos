@@ -331,35 +331,7 @@ def desactivar_servicio(request, id):
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_servicio.html', context)
     
-def ver_listadodeservicios():
-    try:
-        servicios=Servicio.objects.all()
-        data = {
-            'id': servicios.id,
-            'nombre': servicios.nombre,
-            'precio': servicios.precio,
-        }
-    except Servicio.DoesNotExist:
-        data = {}  
-    
-    return JsonResponse(data)
-
-def ver_servicio(request, id):
-    try:
-        servicio = Servicio.objects.get(id=id)
-        data = {
-            'id': servicio.id,
-            'nombre': servicio.nombre,
-            'descripcion': servicio.descripcion,
-            'precio': servicio.precio,
-        }
-    except Servicio.DoesNotExist:
-        data = {}  
-    
-    return JsonResponse(data)  
-
 #---------------------------------------------------------------------------------------------------------------
-    
 
 def registrar_reserva(request):
     if request.method == 'POST':
