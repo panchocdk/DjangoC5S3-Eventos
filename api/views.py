@@ -17,16 +17,14 @@ def ver_servicio(request, id):
         data = {}  
     return JsonResponse(data, json_dumps_params={'indent': 4}, safe=False)
 
-def servicios():
-    try:
-        servicios=Servicio.objects.all()
-        for i in servicios:
-            data = {
-                'id': i.id,
-                'nombre': i.nombre,
-                'precio': i.precio,
+def servicios(request): 
+     servicios=Servicio.objects.all()
+     data=[]
+     for servicio in servicios:
+        firstdata ={
+            'id': (servicio.id),
+            'nombre': (servicio.nombre),
+            'precio': (servicio.precio),
             }
-    except Servicio.DoesNotExist:
-        data = {}  
-    
-    return JsonResponse(data)
+        data.append(firstdata)
+     return JsonResponse(data, json_dumps_params={'indent': 4}, safe=False)
