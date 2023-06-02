@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <div class="container">
+
+        <h2>Eliminar reserva: {{ reserva.servicio }}</h2>
+
+        <p>Quiere proceder con la eliminacion de esta reserva?</p>
+
+        <form method="post">
+
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+            <button type="submit">Sí, deseo eliminar</button>
+
+            <a href="{{ '/listar_reservas' }}"> Cancelar</a>
+
+        </form>
+
+    </div>
+
+{% endblock %}
