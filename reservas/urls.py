@@ -27,11 +27,12 @@ urlpatterns = [
     path('listar_servicios/', views.listar_servicios, name='listar_servicios'),
     path('activar_servicio/<int:id>/', views.activar_servicio, name='activar_servicio'),
     path('desactivar_servicio/<int:id>/', views.desactivar_servicio, name='desactivar_servicio'),
-    #---------------------------------------------------------------------------------------------
-    path('registrar_reserva/', views.registrar_reserva, name='registrar_reserva'),
-    path('eliminar_reserva/<int:id>/', views.eliminar_reserva, name='eliminar_reserva'),
+    #---------------RESERVA DE SERVICIOS-------------------------------------------------------------------------
+    path('crear_reserva/', views.crear_reserva, name='crear_reserva'),
     path('actualizar_reserva/<int:reserva_id>/', views.actualizar_reserva, name='actualizar_reserva'),
     path('listar_reservas/', views.listar_reservas, name='listar_reservas'), 
+    path('eliminar_reserva/<int:id>/', views.eliminar_reserva, name='eliminar_reserva'),
+    path('eliminar_ok/', views.eliminar_ok, name='eliminar_ok'), 
     #---------------------------------------------------------------------------------------------
 ]
 

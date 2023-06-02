@@ -331,34 +331,33 @@ def desactivar_servicio(request, id):
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_servicio.html', context)
     
-#---------------------------------------------------------------------------------------------------------------
 
-def registrar_reserva(request):
-    if request.method == 'POST':
-        form = ReservaDeServicioForm(request.POST)
+#----------------RESERVA DE SERVICIOS-------------------------------------------------------------
+
+
+#vista para registrar reservas de servicio
+def crear_reserva(request):
+    #Instancia de ServicioForm
+    form=ReservaDeServicioForm()
+    if request.POST:
+        form=ReservaDeServicioForm(request.POST)
         if form.is_valid():
-            form.save()  
-            return redirect('listar_reservas')  
-    else:
-        form = ReservaDeServicioForm()
-    
-    context = {'form': form}
-    return render(request, 'registrar_reserva.html', context)
-
-def eliminar_reserva(request, id):
-    try:
-        reserva = ReservaDeServicio.objects.get(id=id)
-    except ReservaDeServicio.DoesNotExist:
-        messages.error(request, 'La reserva no existe.')
-        return redirect('listar_reservas')  
-    
-    if request.method == 'POST':
-        reserva.delete()
-        messages.success(request, 'La reserva se ha eliminado correctamente.')
-        return redirect('listar_reservas')  
-    
-    context = {'reserva': reserva}
-    return render(request, 'eliminar_reserva.html', context)
+            reserva=ReservaDeServicio(
+                fecha_reserva=form.cleaned_data['fecha_reserva'],
+                cliente=form.cleaned_data['cliente'],
+                responsable=form.cleaned_data['responsable'],
+                empleado=form.cleaned_data['empleado'],
+                servicio=form.cleaned_data['servicio'],
+                precio=form.cleaned_data['precio'],  
+            )
+            reserva.save()            
+            return redirect('/listar_reservas/')
+        else:
+            return redirect('/listar_reservas/')
+    context={
+        'form':form
+        }
+    return render(request, 'crear_reserva.html', context)
 
 #Vista para actualizar una Reserva de Servicio
 def actualizar_reserva(request, reserva_id):
@@ -386,3 +385,19 @@ def listar_reservas(request):
         return render(request,'listar_reservas.html', context)
     except Exception:
         return render(request, 'error.html')
+    
+#Vista para eliminar una reserva de servicio 
+def eliminar_reserva(request, id):
+    try:
+        reserva = ReservaDeServicio.objects.get(id=id)    
+        if request.POST:
+            reserva.delete()
+            return redirect('/eliminar_ok/')
+        context={'reserva':reserva}
+        return render(request, 'eliminar_reserva.html', context)
+    except Exception:
+        return render(request, 'error.html')
+    
+#Vista para confirmar eliminacion
+def eliminar_ok(request):
+    return render(request, 'eliminar_ok.html')

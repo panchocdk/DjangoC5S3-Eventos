@@ -27,6 +27,16 @@ class ServicioForm(forms.ModelForm):
         fields = 'nombre','descripcion','precio'
 
 class ReservaDeServicioForm(forms.ModelForm):
+
     class Meta:
         model = ReservaDeServicio
-        fields = ['fecha_creacion', 'fecha_reserva', 'cliente', 'responsable', 'empleado', 'servicio', 'precio']
+        fields = 'fecha_reserva', 'cliente', 'responsable', 'empleado', 'servicio', 'precio'
+        widgets = {
+            'fecha_reserva': forms.DateInput(attrs={'type': 'date'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field, forms.ModelChoiceField) and (field_name=='cliente' or field_name=='responsable' or field_name=='empleado' or field_name=='servicio'):
+                field.queryset = field.queryset.filter(activo=True)

@@ -33,7 +33,7 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=30)
     activo = models.BooleanField(default=True)
 
-    def __srt__(self):
+    def __str__(self):
         return str(self.nombre+' '+self.apellido)
     
 #Modelo de Servicio
@@ -44,13 +44,13 @@ class Servicio(models.Model):
     precio = models.IntegerField()
     activo = models.BooleanField(default=True)
 
-    def __srt__(self):
+    def __str__(self):
         return str(self.nombre)
     
 #Modelo de Reserva de Servicio
 class ReservaDeServicio(models.Model):
 
-    fecha_creacion = models.DateTimeField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_reserva = models.DateField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     responsable = models.ForeignKey(Coordinador, on_delete=models.CASCADE)

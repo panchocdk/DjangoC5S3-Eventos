@@ -26,7 +26,7 @@
                     {% for reserva in reservas %}
                     <tr>
                         <td>{{ reserva.id }}</td>
-                        <td>{{ reserva.fecha_creacion }}</td>
+                        <td>{{ reserva.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</td>
                         <td>{{ reserva.fecha_reserva }}</td>
                         <td>{{ reserva.cliente }}</td>
                         <td>{{ reserva.responsable }}</td>
@@ -43,7 +43,7 @@
             </table>
             <br>
 
-            <a href="{{ '/registrar_reserva' }}" class="button">Registrar una Reserva</a>
+            <a href="{{ '/crear_reserva' }}" class="button">Registrar una Reserva</a>
 
         </div>
     </div>
