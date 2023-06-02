@@ -30,5 +30,6 @@ urlpatterns = [
     #---------------------------------------------------------------------------------------------
     path('registrar_reserva/', views.registrar_reserva, name='registrar_reserva'),
     path('eliminar_reserva/<int:id>/', views.eliminar_reserva, name='eliminar_reserva'),
+    path('actualizar_reserva/<int:reserva_id>/', views.actualizar_reserva, name='actualizar_reserva'),    
 ]
 

@@ -360,3 +360,19 @@ def eliminar_reserva(request, id):
     
     context = {'reserva': reserva}
     return render(request, 'eliminar_reserva.html', context)
+
+#Vista para actualizar una Reserva de Servicio
+def actualizar_reserva(request, reserva_id):
+    try:
+        reserva = ReservaDeServicio.objects.get(id=reserva_id)
+        if request.method == 'POST':
+            form = ReservaDeServicioForm(request.POST, instance=reserva)
+            if form.is_valid():
+                form.save()
+                return redirect('/listar_reservas/')
+        else:
+            form = ReservaDeServicioForm(instance=reserva)
+        context = {'form': form}
+        return render(request, 'actualizar_reserva.html', context)
+    except Exception:
+        return render(request, 'error.html')
