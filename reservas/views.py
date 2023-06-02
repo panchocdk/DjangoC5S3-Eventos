@@ -331,6 +331,19 @@ def desactivar_servicio(request, id):
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_servicio.html', context)
     
+def ver_listadodeservicios():
+    try:
+        servicios=Servicio.objects.all()
+        data = {
+            'id': servicios.id,
+            'nombre': servicios.nombre,
+            'precio': servicios.precio,
+        }
+    except Servicio.DoesNotExist:
+        data = {}  
+    
+    return JsonResponse(data)
+
 def ver_servicio(request, id):
     try:
         servicio = Servicio.objects.get(id=id)
@@ -343,8 +356,7 @@ def ver_servicio(request, id):
     except Servicio.DoesNotExist:
         data = {}  
     
-    return JsonResponse(data)
-    
+    return JsonResponse(data)  
 
 #---------------------------------------------------------------------------------------------------------------
     
