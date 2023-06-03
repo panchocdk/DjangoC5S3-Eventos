@@ -18,7 +18,6 @@
                         <th>Responsable</th>
                         <th>Empleado</th>
                         <th>Servicio</th>
-                        <th>Precio</th>
                         <th>Acciones a realizar</th>
                     </tr>
                 </thead>
@@ -32,7 +31,6 @@
                         <td>{{ reserva.responsable }}</td>
                         <td>{{ reserva.empleado }}</td>
                         <td>{{ reserva.servicio }}</td>
-                        <td>{{ reserva.precio }}</td>
                         <td>
                             <a href="{{ '/actualizar_reserva' }}/{{ reserva.id }}">Actualizar</a>
                             <a href="{{ '/eliminar_reserva' }}/{{ reserva.id }}">Eliminar</a>

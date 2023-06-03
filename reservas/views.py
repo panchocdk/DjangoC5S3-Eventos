@@ -348,7 +348,6 @@ def crear_reserva(request):
                 responsable=form.cleaned_data['responsable'],
                 empleado=form.cleaned_data['empleado'],
                 servicio=form.cleaned_data['servicio'],
-                precio=form.cleaned_data['precio'],  
             )
             reserva.save()            
             return redirect('/listar_reservas/')

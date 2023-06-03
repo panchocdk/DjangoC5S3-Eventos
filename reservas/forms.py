@@ -30,7 +30,7 @@ class ReservaDeServicioForm(forms.ModelForm):
 
     class Meta:
         model = ReservaDeServicio
-        fields = 'fecha_reserva', 'cliente', 'responsable', 'empleado', 'servicio', 'precio'
+        fields = 'fecha_reserva', 'cliente', 'responsable', 'empleado', 'servicio'
         widgets = {
             'fecha_reserva': forms.DateInput(attrs={'type': 'date'})
         }
