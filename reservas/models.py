@@ -56,5 +56,3 @@ class ReservaDeServicio(models.Model):
     responsable = models.ForeignKey(Coordinador, on_delete=models.CASCADE)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
-    precio = models.IntegerField()
-    

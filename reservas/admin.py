@@ -45,7 +45,7 @@ class ServicioAdmin(admin.ModelAdmin):
 
 class ReservaDeServicioAdmin(admin.ModelAdmin):
     #list display: muestra los atributos del objeto en forma de lista
-    list_display=['fecha_creacion','fecha_reserva','cliente','responsable','empleado','servicio','precio']
+    list_display=['fecha_creacion','fecha_reserva','cliente','responsable','empleado','servicio']
 
     #search fields: abre un campo 'Search' para poder buscar por los campos indicados
     search_fields=['responsable','cliente','empleado','servicio']
