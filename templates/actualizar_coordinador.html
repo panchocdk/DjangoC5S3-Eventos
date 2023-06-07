@@ -1,7 +1,8 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <div class="container">
+
+    <div class="container p-5">
 
         <h2>Actualizar Coordinador</h2>
 
@@ -13,13 +14,13 @@
 
             <br>
             <br>
-            <button type="submit" class="button">Actualizar</button>
+            <button type="submit" class="btn btn-outline-primary">Actualizar</button>
 
         </form>
 
         <br>
 
-        <a href="{{ '/listar_coordinadores' }}">Cancelar</a> <!--verificar que funciona-->
+        <a href="{{ '/listar_coordinadores' }}" class="btn btn-outline-danger">Cancelar</a> 
 
     </div>
 {% endblock %}

@@ -1,26 +1,33 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <div class="container">
-        <h2>Lista de Clientes</h2>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class=''>
 
-        <table style="margin: 0 auto;">
+        <h2>Lista de Clientes</h2>
+        <div class="table-responsive p-5">
+            <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Activo</th>
-                    <th>Acciones a realizar</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Acciones a realizar</th>
                 </tr>
             </thead>
             <tbody>
                 {% for cliente in clientes %}
                 <tr>
-                    <td>{{ cliente.id }}</td>
-                    <td>{{ cliente.nombre }}</td>
-                    <td>{{ cliente.apellido }}</td>
-                    <td>
+                    <td scope="row">{{ cliente.id }}</td>
+                    <td scope="row">{{ cliente.nombre }}</td>
+                    <td scope="row">{{ cliente.apellido }}</td>
+                    <td scope="row">
                         {% if cliente.activo %}
                             {{ 'Si' }}
                         {% else %}
@@ -28,9 +35,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ '/actualizar_cliente' }}/{{ cliente.id }}">Actualizar</a>
+                        <a href="{{ '/actualizar_cliente' }}/{{ cliente.id }}" button type="button" class="btn btn-primary">Actualizar</a>
                         {% if cliente.activo %}
-                            <a href="{{ '/desactivar_cliente' }}/{{ cliente.id }}">Desactivar</a>
+                            <a href="{{ '/desactivar_cliente' }}/{{ cliente.id }}" button type="button" class="btn btn-danger">Desactivar</a>
                         {% else %}
                             <a href="{{ '/activar_cliente' }}/{{ cliente.id }}">Activar</a>
                         {% endif %}
@@ -46,6 +53,6 @@
 
         <br>
 
-        <a href="{{ '/crear_cliente' }}" class="button">Registrar un Cliente</a>
+        <a href="{{ '/crear_cliente' }}" class="btn btn-outline-primary">Registrar un Cliente</a>
     </div>
 {% endblock %}

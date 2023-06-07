@@ -1,7 +1,10 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <div class="container">
+<br>
+<br>
+<br>
+    <div class='container p-5'>
 
         <h2>Actualizar Servicio</h2>
 
@@ -13,13 +16,13 @@
 
             <br>
             <br>
-            <button type="submit" class="button">Actualizar</button>
+            <button type="submit" class="btn btn-outline-primary">Actualizar</button>
 
         </form>
 
         <br>
 
-        <a href="{{ '/listar_servicios' }}">Cancelar</a> 
+        <a href="{{ '/listar_servicios' }}" class="btn btn-outline-danger">Cancelar</a> 
 
     </div>
 {% endblock %}
