@@ -12,9 +12,9 @@
 
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-            <button type="submit">Sí, deseo eliminar</button>
+            <button type="submit" class="btn btn-danger" >Sí, deseo eliminar</button>
 
-            <a href="{{ '/listar_reservas' }}"> Cancelar</a>
+            <a href="{{ '/listar_reservas' }}" button type="button" class="btn btn-primary"> Cancelar</a>
 
         </form>
 

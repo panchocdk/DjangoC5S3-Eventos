@@ -2,14 +2,16 @@
 
 {% block content %}
 
-    <div class='container'>
+<br>
+<br>
+<br>
+    <div class='container p-5'>
     
         <h2>Lista de Reservas de Servicios</h2>
 
-        <div class="form-group mb-2 col col-lg-6">
-        
-            <table class="center">
-                <thead>
+        <div class="table-responsive p-5">
+            <table class="table">
+                <thead class="table-light">
                     <tr>
                         <th>ID</th>
                         <th>Fecha de Creación</th>
@@ -32,8 +34,8 @@
                         <td>{{ reserva.empleado }}</td>
                         <td>{{ reserva.servicio }}</td>
                         <td>
-                            <a href="{{ '/actualizar_reserva' }}/{{ reserva.id }}">Actualizar</a>
-                            <a href="{{ '/eliminar_reserva' }}/{{ reserva.id }}">Eliminar</a>
+                            <a href="{{ '/actualizar_reserva' }}/{{ reserva.id }}" button type="button" class="btn btn-primary">Actualizar</a>
+                            <a href="{{ '/eliminar_reserva' }}/{{ reserva.id }}"<button type="button" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -41,7 +43,7 @@
             </table>
             <br>
 
-            <a href="{{ '/crear_reserva' }}" class="button">Registrar una Reserva</a>
+            <a href="{{ '/crear_reserva' }}" class="btn btn-outline-primary">Registrar una Reserva</a>
 
         </div>
     </div>

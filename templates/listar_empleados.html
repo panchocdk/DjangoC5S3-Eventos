@@ -1,15 +1,17 @@
-{% extends 'index.html'%}
+
+{% extends 'index.html' %}
+
 
 {% block content %}
 
-    <div class='container'>
-    
+<br>
+<br>
+<br>
+    <div class='container p-5'>
         <h2>Lista de Empleados</h2>
 
-        <div class="form-group mb-2 col col-lg-6">
-        
-            <table class="center">
-                <thead>
+        <div class="table-responsive p-5">
+            <table class="table">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
@@ -34,9 +36,9 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ '/actualizar_empleado' }}/{{ empleado.id }}">Actualizar</a>
+                            <a href="{{ '/actualizar_empleado' }}/{{ empleado.id }}" button type="button" class="btn btn-primary"</button>Actualizar</a>
                             {% if empleado.activo %}
-                                <a href="{{ '/desactivar_empleado' }}/{{ empleado.id }}">Desactivar</a>
+                                <a href="{{ '/desactivar_empleado' }}/{{ empleado.id }}" button type="button" class="btn btn-danger">Desactivar</a>
                             {% else %}
                                 <a href="{{ '/activar_empleado' }}/{{ empleado.id }}">Activar</a>
                             {% endif %}
@@ -47,9 +49,7 @@
             </table>
             <br>
 
-            <a href="{{ '/crear_empleado' }}" class="button">Registrar un Empleado</a>
-
+            <a href="{{ '/crear_empleado' }}" class="btn btn-outline-primary">Registrar un Empleado</a>
         </div>
     </div>
-
 {% endblock %}
