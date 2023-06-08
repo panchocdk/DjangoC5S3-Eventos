@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class='container p-4'>
+    <h2>Quieres trabajar con nosotros</h2>
+    
+    <form id="contrataciones-form" method="POST">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+      <div class="mb-3">
+        <label for="nombre_apellido" class="form-label">Nombre y Apellido</label>
+        <input type="text" class="form-control" id="nombre_apellido" name="nombre_apellido" required>
+      </div>
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="tel" class="form-control" id="telefono" name="telefono" required>
+      </div>
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" required>
+      </div>
+      <div class="mb-3">
+        <label for="proyecto_idea" class="form-label">Proyecto/Idea</label>
+        <input type="text" class="form-control" id="proyecto_idea" name="proyecto_idea" required>
+      </div>
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Mensaje</label>
+        <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById("contrataciones-form").addEventListener("submit", function(event) {
+      event.preventDefault(); 
+      
+      alert("El formulario se ha enviado con éxito!");
+
+      window.location.href = {{ 'http://127.0.0.1:8000/' }};
+    });
+  </script>
+{% endblock %}
