@@ -25,10 +25,8 @@ Proyecto Integrador Grupal Squad 3 Comision 5 - Caso de Negocio N° 1  -
 Nuestro proyecto integrador final consiste en el desarrollo de una aplicación we base de reservas de servicios para eventos, la cual permitirá a sus usuarios consultar el catálogo de servicios que la empresa ofrece, y un listado de las reservas realizadas por los clientes. <br /> Esta aplicación permite el registro de empleados, servicios y clientes, asi como la visualización del listado de los mismos. A su vez, es posible acceder a diferentes endpoints con los datos disponibles correspondientes a cada categoría. <br /> Se utilizaron Python/Django como entorno de desarrollo, SQL como base de datos y, las librerias Jinja y Bootstrap.
 
  <br/>
- 
-### Como ponerlo en marcha localmente ? 
- <br/>
 
+### Como ponerlo en marcha localmente ? 
 #### Requisitos
 * Python 3.9 o versiones recientes
 * Django 4.0
