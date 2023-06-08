@@ -15,11 +15,11 @@
     .center {
         margin-left:auto;
         margin-right:auto;
-    }
-    table, td, th {
+    } 
+     table, td, th {
         border: 1px solid black;
     }
-    .button {
+    /* .button {
         display: inline-block;
         padding: 8px 16px;
         font-size: 14px;
@@ -35,20 +35,11 @@
     .button:hover {
         background-color: #0069d9;
         border-color: #0062cc;
-    }
+    } */
 
-    #nom {
-        font-size: 24px; /* Ajusta el tamaño de fuente según tus preferencias */
-        font-weight: bold; /* Ajusta el peso de fuente según tus preferencias */
-        margin-top: -50px; /* Ajusta este valor para mover el texto hacia arriba */
-      }
+
       
-      #nom::after {
-        content: "\A"; /* Agrega un salto de línea después del span */
-        white-space: pre; /* Asegura que el salto de línea sea respetado */
-      }
-      
-      
+    
     
     /* header{
     height: 100px;

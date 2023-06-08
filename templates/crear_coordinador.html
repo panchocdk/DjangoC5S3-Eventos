@@ -10,7 +10,7 @@
         <form action="" method="post">
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
             
-            <div class="form-group">
+            <div class="table">
                 <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
                 {{ form.nombre }}
                 {% if form.nombre.errors %}
@@ -22,7 +22,7 @@
                 {% endif %}
             </div>
             
-            <div class="form-group">
+            <div class="table">
                 <label for="{{ form.apellido.id_for_label }}">Apellido:</label>
                 {{ form.apellido }}
                 {% if form.apellido.errors %}
@@ -34,8 +34,8 @@
                 {% endif %}
             </div>
             
-            <div class="form-group">
-                <label for="{{ form.numero_documento.id_for_label }}">Número de Documento:</label>
+            <div class="table">
+                <label for="{{ form.numero_documento.id_for_label }}">Documento: </label>
                 {{ form.numero_documento }}
                 {% if form.numero_documento.errors %}
                     <ul class="errorlist">

@@ -7,52 +7,54 @@
 <br>
 <br>
 <br>
-    <div class=''>
+  <div class=''>
 
-  <h2>Listado de Coordinadores</h2>
+      <h2>Listado de Coordinadores</h2>
 
-  <div class="table-responsive p-5">
-    <table class="table">
+      <div class="table-responsive p-5">
+        <table class="table">
 
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Número de Documento</th>
-        <th>Fecha de Alta</th>
-        <th>Activo</th>
-        <th>Acciones a realizar</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for coordinador in coordinadores %}
-        <tr>
-          <td>{{ coordinador.id }}</td>
-          <td>{{ coordinador.nombre }}</td>
-          <td>{{ coordinador.apellido }}</td>
-          <td>{{ coordinador.numero_documento }}</td>
-          <td>{{ coordinador.fecha_alta.strftime('%Y-%m-%d %H:%M') }}</td>
-          <td>
-            {% if coordinador.activo %}
-              {{ 'Si' }}
-            {% else %}
-              {{ 'No' }}
-            {% endif %}
-          </td>
-          <td>
-            <a href="{{ '/actualizar_coordinador' }}/{{ coordinador.id }}" button type="button" class="btn btn-primary">Actualizar</a>
-            {% if coordinador.activo %}
-              <a href="{{ '/desactivar_coordinador' }}/{{ coordinador.id }}" button type="button" class="btn btn-danger">Desactivar</a>
-            {% else %}
-              <a href="{{ '/activar_coordinador' }}/{{ coordinador.id }}">Activar</a>
-            {% endif %}
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <br>
-  <a href="{{ '/crear_coordinador' }}" class="btn btn-outline-primary">Crear Coordinador</a>
-</div>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Número de Documento</th>
+            <th>Fecha de Alta</th>
+            <th>Activo</th>
+            <th>Acciones a realizar</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for coordinador in coordinadores %}
+            <tr>
+              <td>{{ coordinador.id }}</td>
+              <td>{{ coordinador.nombre }}</td>
+              <td>{{ coordinador.apellido }}</td>
+              <td>{{ coordinador.numero_documento }}</td>
+              <td>{{ coordinador.fecha_alta.strftime('%Y-%m-%d %H:%M') }}</td>
+              <td>
+                {% if coordinador.activo %}
+                  {{ 'Si' }}
+                {% else %}
+                  {{ 'No' }}
+                {% endif %}
+              </td>
+              <td>
+                <a href="{{ '/actualizar_coordinador' }}/{{ coordinador.id }}" class="btn btn-primary">Actualizar</a>
+                {% if coordinador.activo %}
+                  <a href="{{ '/desactivar_coordinador' }}/{{ coordinador.id }}" class="btn btn-danger">Desactivar</a>
+                {% else %}
+                  <a href="{{ '/activar_coordinador' }}/{{ coordinador.id }}" class="btn btn-success">Activar</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+
+      <a href="{{ '/crear_coordinador' }}" class="btn btn-outline-primary">Crear Coordinador</a>
+  </div>
 {% endblock %}

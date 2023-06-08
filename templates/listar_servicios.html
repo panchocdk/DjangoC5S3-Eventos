@@ -40,7 +40,7 @@
                             {% if servicio.activo %}
                                 <a href="{{ '/desactivar_servicio' }}/{{ servicio.id }}" <button type="button" class="btn btn-danger">Desactivar</a>
                             {% else %}
-                                <a href="{{ '/activar_servicio' }}/{{ servicio.id }}">Activar</a>
+                                <a href="{{ '/activar_servicio' }}/{{ servicio.id }}" class="btn btn-success">Activar</a>
                             {% endif %}
                         </td>
                     </tr>

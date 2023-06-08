@@ -7,7 +7,7 @@ class Empleado(models.Model):
 
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
-    numero_legajo = models.IntegerField()
+    numero_legajo = models.IntegerField(unique=True, blank=False)
     activo = models.BooleanField(default=True)
 
     def __str__(self):

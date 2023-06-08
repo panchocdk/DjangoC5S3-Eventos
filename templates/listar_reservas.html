@@ -8,10 +8,11 @@
     <div class='container p-5'>
     
         <h2>Lista de Reservas de Servicios</h2>
+        <br>
+<br>
 
-        <div class="table-responsive p-5">
+        <div class="table-responsive">
             <table class="table">
-                <thead class="table-light">
                     <tr>
                         <th>ID</th>
                         <th>Fecha de Creación</th>
@@ -22,7 +23,6 @@
                         <th>Servicio</th>
                         <th>Acciones a realizar</th>
                     </tr>
-                </thead>
                 <tbody>
                     {% for reserva in reservas %}
                     <tr>
@@ -35,7 +35,7 @@
                         <td>{{ reserva.servicio }}</td>
                         <td>
                             <a href="{{ '/actualizar_reserva' }}/{{ reserva.id }}" button type="button" class="btn btn-primary">Actualizar</a>
-                            <a href="{{ '/eliminar_reserva' }}/{{ reserva.id }}"<button type="button" class="btn btn-danger">Eliminar</a>
+                            <a href="{{ '/eliminar_reserva' }}/{{ reserva.id }}"button type="button" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                     {% endfor %}
