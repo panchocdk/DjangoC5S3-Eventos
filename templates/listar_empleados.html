@@ -20,7 +20,6 @@
                         <th>Activo</th>
                         <th>Acciones a realizar</th>
                     </tr>
-                </thead>
                 <tbody>
                     {% for empleado in empleados %}
                     <tr>
@@ -40,7 +39,7 @@
                             {% if empleado.activo %}
                                 <a href="{{ '/desactivar_empleado' }}/{{ empleado.id }}" button type="button" class="btn btn-danger">Desactivar</a>
                             {% else %}
-                                <a href="{{ '/activar_empleado' }}/{{ empleado.id }}">Activar</a>
+                                <a href="{{ '/activar_empleado' }}/{{ empleado.id }}" class="btn btn-success">Activar</a>
                             {% endif %}
                         </td>
                     </tr>

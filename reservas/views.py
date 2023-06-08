@@ -29,7 +29,7 @@ def crear_empleado(request):
             empleado.save()
             return redirect('/listar_empleados/')
         else:
-            return redirect('/listar_empleados/')
+            return redirect('/crear_empleado/')
     context={
         'form':form
         }
