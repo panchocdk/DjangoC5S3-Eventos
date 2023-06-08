@@ -1,4 +1,7 @@
-<img src="static\img\logo1.jpg" width="100" style="float:left"/>
+<p float="left">
+<img src="static\img\logo1.jpg" width="100"/>
+<img src="static\img\descarga.png" width="100" />
+</p>
 
 # DjangoC5S3- Eventos
 
