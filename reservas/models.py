@@ -56,3 +56,14 @@ class ReservaDeServicio(models.Model):
     responsable = models.ForeignKey(Coordinador, on_delete=models.CASCADE)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
+
+#Modelo para Contrataciones
+class Contratacion(models.Model):
+    nombre_apellido = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=200)
+    proyecto_idea = models.CharField(max_length=200)
+    mensaje = models.TextField()
+
+    def __str__(self):
+        return self.nombre_apellido

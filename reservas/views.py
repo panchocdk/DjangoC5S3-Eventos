@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from.models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio
+from.models import Empleado, Cliente, Coordinador, Servicio, ReservaDeServicio, Contratacion
 from .forms import EmpleadoForm, ClienteForm, CoordinadorForm, ServicioForm, ReservaDeServicioForm
 from django.contrib import messages
 from django.http import JsonResponse
@@ -419,3 +419,34 @@ def eliminar_reserva(request, id):
 #Vista para confirmar eliminacion
 def eliminar_ok(request):
     return render(request, 'eliminar_ok.html')
+
+
+
+# COSAS EXTRAS PARA EL PROYECTO 
+def sobre_nosotros(request):
+    return render(request, 'sobre_nosotros.html')
+
+
+def contrataciones(request):
+    if request.method == 'POST':
+        nombre_apellido = request.POST['nombre_apellido']
+        telefono = request.POST['telefono']
+        direccion = request.POST['direccion']
+        proyecto_idea = request.POST['proyecto_idea']
+        mensaje = request.POST['mensaje']
+
+        contratacion = Contratacion(
+            nombre_apellido=nombre_apellido,
+            telefono=telefono,
+            direccion=direccion,
+            proyecto_idea=proyecto_idea,
+            mensaje=mensaje
+        )
+
+        contratacion.save()
+
+    return render(request, 'contrataciones.html')
+
+def contacto(request):
+    return render(request, 'contacto.html')
+
