@@ -27,6 +27,10 @@ Proyecto Integrador Grupal Squad 3 Comision 5 - Caso de Negocio N° 1  -
 
 &emsp;&emsp;&emsp;&emsp; - [Modulo Coordinador](#modulo-coordinador)
 
+&emsp;&emsp;&emsp;&emsp; - [Modulo Servicio](#modulo-servicio)
+
+&emsp;&emsp;&emsp;&emsp; - [Modulo Reserva de Servicio](#modulo-reserva-de-servicio)
+
 ### Sobre el proyecto
  <br/>
 Nuestro proyecto integrador final consiste en el desarrollo de una aplicación web base de reservas de servicios para eventos, la cual permitirá a sus usuarios consultar el catálogo de servicios que la empresa ofrece, y un listado de las reservas realizadas por los clientes. <br /> Esta aplicación permite el registro de empleados, servicios y clientes, asi como la visualización del listado de los mismos. A su vez, es posible acceder a diferentes endpoints con los datos disponibles correspondientes a cada categoría. <br /> Se utilizaron Python/Django como entorno de desarrollo, SQL como base de datos y, las librerias Jinja y Bootstrap.
@@ -142,7 +146,7 @@ En este modulo se pueden registrar nuevos coordinadores, actualizarlos, acceder 
  
  <br/>
 
- #### Modulo Servicios
+ #### Modulo Servicio
 En este modulo se pueden registrar nuevos servicios, actualizarlos, acceder al listado de servicios activos y eliminar o restaurar registros.
 
  -  [Registrar Servicio](http://127.0.0.1:8000/crear_servicio/)
@@ -166,4 +170,27 @@ En este modulo se pueden registrar nuevos servicios, actualizarlos, acceder al l
  -  [Desactivar Servicio 1](http://127.0.0.1:8000/desactivar_servicio/1)
 
 <img src="static\img\captures\desactivar_servicio.png"/>
+  
+ <br/>
+
+ #### Modulo Reserva de Servicio
+En este modulo se pueden registrar nuevas reservas servicios, actualizarlas, acceder al listado de reservas activas y eliminar o restaurar registros.
+
+ -  [Registrar Reserva de Servicio](http://127.0.0.1:8000/crear_reserva/)
+
+ <img src="static\img\captures\registrar_reserva.png"/>
+
+ -  [Listado de Reservas de Servicios](http://127.0.0.1:8000/listar_reservas/)
+
+  <img src="static\img\captures\listar_reserva.png"/>
+
+ Funcionalidades para registros de reservas de servicios existentes. A modo de ejemplo:
+
+ -  [Actualizar Reserva de Servicio 1](http://127.0.0.1:8000/actualizar_reserva/1)
+
+<img src="static\img\captures\actualizar_reserva.png"/>
+
+ -  [Eliminar Reserva de Servicio 1](http://127.0.0.1:8000/eliminar_reserva/1)
+
+<img src="static\img\captures\eliminar_reserva.png"/>
  
