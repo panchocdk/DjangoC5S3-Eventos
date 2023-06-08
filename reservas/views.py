@@ -121,7 +121,7 @@ def crear_cliente(request):
 #Vista para Actualizar un Cliente
 def actualizar_cliente(request, cliente_id):
     try:
-        #Busca el cliente al que le corresponde la id ingresada
+        #Accede al cliente cuya id corresponde con la ingresada
         cliente = Cliente.objects.get(id=cliente_id)
         if request.method == 'POST':
             form = ClienteForm(request.POST, instance=cliente)
@@ -147,7 +147,7 @@ def listar_clientes(request):
     except Exception:
         return render(request, 'error.html')
 
-#vista activar cliente
+#Vista para activar clientes
 def activar_cliente(request, cliente_id):
     try:
         #Accede al cliente que corresponde con la id ingresada
@@ -162,7 +162,7 @@ def activar_cliente(request, cliente_id):
         context = {'mensaje': mensaje}
         return render(request, 'activar_cliente.html', context)
 
-#vista desactivar_cliente   
+#Vista para desactivar un cliente   
 def desactivar_cliente(request, id):
     try:
         #Accede al cliente que corresponde con la id ingresada
@@ -183,20 +183,22 @@ def desactivar_cliente(request, id):
 
 #Vista para Registrar nuevos Coordinadores
 def crear_coordinador(request):
+    #Instancia de CoordinadorForm
     form = CoordinadorForm()
     if request.method == 'POST':
         form = CoordinadorForm(request.POST)
         if form.is_valid():
             numero_documento = form.cleaned_data['numero_documento']
+            #Verificacion del numero de documento, este debe ser unico
             if Coordinador.objects.filter(numero_documento=numero_documento).exists():
                 messages.error(request, 'El número de documento ya está en uso.')
             else:
                 coordinador = form.save(commit=False)
-                coordinador.save()
+                coordinador.save() #Guarda los datos del nuevo coordinador
                 messages.success(request, 'El coordinador se creó correctamente.')
-                return redirect('/listar_coordinadores/')
+                return redirect('/listar_coordinadores/') #Redirecciona al listado de coordinadores
         else:
-            # Pasar los mensajes de error al formulario
+            # Pasa los mensajes de error al formulario
             for field_name, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f'{form.fields[field_name].label}: {error}')
@@ -207,12 +209,13 @@ def crear_coordinador(request):
 #Vista para actualizar un Coordinador
 def actualizar_coordinador(request, coordinador_id):
     try:
+        #Accede al coordinador que corresponde con la id ingresada
         coordinador = Coordinador.objects.get(id=coordinador_id)
         if request.method == 'POST':
             form = CoordinadorForm(request.POST, instance=coordinador)
             if form.is_valid():
-                form.save()
-                return redirect('/listar_coordinadores/')
+                form.save() #Guarda los datos actualizados del coordinador
+                return redirect('/listar_coordinadores/') #Redirecciona al listado de coordinadores
         else:
             form = CoordinadorForm(instance=coordinador)
         context = {'form': form}
@@ -223,6 +226,7 @@ def actualizar_coordinador(request, coordinador_id):
 #Vista para Listar a los Coordinadores
 def listar_coordinadores(request):
     try:
+        #Accede a todos los coordinadores registrados
         coordinadores=Coordinador.objects.all()
         context={
             'coordinadores':coordinadores
@@ -231,12 +235,13 @@ def listar_coordinadores(request):
     except Exception:
         return render(request, 'error.html')
 
-#vista activar_coordinador 
+#Vista para activar un coordinador 
 def activar_coordinador(request, id):
     try:
+        #Accede al coordinador cuya id coincida con la ingresada
         coordinador = Coordinador.objects.get(id=id)
         coordinador.activo = True
-        coordinador.save()
+        coordinador.save() #Guarda el nuevo estado del coordinador
         mensaje = "Registro de coordinador activado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'activar_coordinador.html', context)
@@ -250,7 +255,7 @@ def desactivar_coordinador(request, coordinador_id):
     try:
         coordinador = Coordinador.objects.get(id=coordinador_id)
         coordinador.activo = False
-        coordinador.save()
+        coordinador.save() #Guarda el nuevo estado del coordinador
         mensaje = "Registro de coordinador desactivado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_coordinador.html', context)

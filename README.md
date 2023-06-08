@@ -25,6 +25,8 @@ Proyecto Integrador Grupal Squad 3 Comision 5 - Caso de Negocio N° 1  -
 
 &emsp;&emsp;&emsp;&emsp; - [Modulo Empleado](#modulo-empleado)
 
+&emsp;&emsp;&emsp;&emsp; - [Modulo Coordinador](#modulo-coordinador)
+
 ### Sobre el proyecto
  <br/>
 Nuestro proyecto integrador final consiste en el desarrollo de una aplicación web base de reservas de servicios para eventos, la cual permitirá a sus usuarios consultar el catálogo de servicios que la empresa ofrece, y un listado de las reservas realizadas por los clientes. <br /> Esta aplicación permite el registro de empleados, servicios y clientes, asi como la visualización del listado de los mismos. A su vez, es posible acceder a diferentes endpoints con los datos disponibles correspondientes a cada categoría. <br /> Se utilizaron Python/Django como entorno de desarrollo, SQL como base de datos y, las librerias Jinja y Bootstrap.
@@ -84,8 +86,10 @@ En este modulo se pueden registrar nuevos clientes, actualizarlos, acceder al li
 
  -  [Desactivar Cliente 1](http://127.0.0.1:8000/desactivar_cliente/1)
 
+ <br/>
+
 #### Modulo Empleado
-En este modulo se puedesn registrar nuevos empleados, actualizarlos, acceder al listado de empleados activos y eliminar o restaurar registros.
+En este modulo se pueden registrar nuevos empleados, actualizarlos, acceder al listado de empleados activos y eliminar o restaurar registros.
 
  -  [Registrar Empleado](http://127.0.0.1:8000/crear_empleado/)
 
@@ -108,4 +112,31 @@ En este modulo se puedesn registrar nuevos empleados, actualizarlos, acceder al 
  -  [Desactivar Empleado 1](http://127.0.0.1:8000/desactivar_empleado/1)
 
 <img src="static\img\captures\desactivar_empleado.png"/>
+
+ <br/>
+
+ #### Modulo Coordinador
+En este modulo se pueden registrar nuevos coordinadores, actualizarlos, acceder al listado de coordinadores activos y eliminar o restaurar registros.
+
+ -  [Registrar Coordinador](http://127.0.0.1:8000/crear_coordinador/)
+
+ <img src="static\img\captures\registrar_coordinador.png"/>
+
+ -  [Listado de Coordinadores](http://127.0.0.1:8000/listar_coordinadores/)
+
+  <img src="static\img\captures\listar_coordinadores.png"/>
+
+ Funcionalidades para registros de empleados existentes. A modo de ejemplo:
+
+ -  [Actualizar Coordinador 1](http://127.0.0.1:8000/actualizar_coordinador/1)
+
+<img src="static\img\captures\actualizar_coordinador.png"/>
+
+ -  [Activar Coordinador 1](http://127.0.0.1:8000/activar_coordinador/1)
+
+<img src="static\img\captures\activar_coordinador.png"/>
+
+ -  [Desactivar Coordinador 1](http://127.0.0.1:8000/desactivar_coordinador/1)
+
+<img src="static\img\captures\desactivar_coordinador.png"/>
  
