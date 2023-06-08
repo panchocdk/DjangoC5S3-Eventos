@@ -126,7 +126,7 @@ En este modulo se pueden registrar nuevos coordinadores, actualizarlos, acceder 
 
   <img src="static\img\captures\listar_coordinadores.png"/>
 
- Funcionalidades para registros de empleados existentes. A modo de ejemplo:
+ Funcionalidades para registros de coordinadores existentes. A modo de ejemplo:
 
  -  [Actualizar Coordinador 1](http://127.0.0.1:8000/actualizar_coordinador/1)
 
@@ -139,4 +139,31 @@ En este modulo se pueden registrar nuevos coordinadores, actualizarlos, acceder 
  -  [Desactivar Coordinador 1](http://127.0.0.1:8000/desactivar_coordinador/1)
 
 <img src="static\img\captures\desactivar_coordinador.png"/>
+ 
+ <br/>
+
+ #### Modulo Servicios
+En este modulo se pueden registrar nuevos servicios, actualizarlos, acceder al listado de servicios activos y eliminar o restaurar registros.
+
+ -  [Registrar Servicio](http://127.0.0.1:8000/crear_servicio/)
+
+ <img src="static\img\captures\registrar_servicio.png"/>
+
+ -  [Listado de Servicios](http://127.0.0.1:8000/listar_servicios/)
+
+  <img src="static\img\captures\listar_servicios.png"/>
+
+ Funcionalidades para registros de servicios existentes. A modo de ejemplo:
+
+ -  [Actualizar Servicio 1](http://127.0.0.1:8000/actualizar_servicio/1)
+
+<img src="static\img\captures\actualizar_servicio.png"/>
+
+ -  [Activar Servicio 1](http://127.0.0.1:8000/activar_servicio/1)
+
+<img src="static\img\captures\activar_servicio.png"/>
+
+ -  [Desactivar Servicio 1](http://127.0.0.1:8000/desactivar_servicio/1)
+
+<img src="static\img\captures\desactivar_servicio.png"/>
  
