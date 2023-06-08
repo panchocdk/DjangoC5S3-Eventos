@@ -105,8 +105,8 @@ def crear_cliente(request):
                 nombre=form.cleaned_data['nombre'],
                 apellido=form.cleaned_data['apellido'],
             )
-            cliente.save()
-            return redirect('/listar_clientes/') #listar_clientes falta hacer
+            cliente.save() #Se guardan los datos ingresados 
+            return redirect('/listar_clientes/') #Redirecciona al listado de clientes 
         else:
             return redirect('/listar_clientes/')
     context={
@@ -117,22 +117,24 @@ def crear_cliente(request):
 #Vista para Actualizar un Cliente
 def actualizar_cliente(request, cliente_id):
     try:
+        #Busca el cliente al que le corresponde la id ingresada
         cliente = Cliente.objects.get(id=cliente_id)
         if request.method == 'POST':
             form = ClienteForm(request.POST, instance=cliente)
             if form.is_valid():
-                form.save()
-            return redirect('/listar_clientes/')
+                form.save() #Se guardan los datos actualizados
+            return redirect('/listar_clientes/') #Redirecciona al listado de clientes
         else:
             form = ClienteForm(instance=cliente)
         context = {'form': form}
         return render(request, 'actualizar_cliente.html', context)
     except Exception:
-        return render(request, 'error.html')
+        return render(request, 'error.html') 
 
 #Vista para Listar a los Clientes     
 def listar_clientes(request):
     try:
+        #Accede a todos los clientes registrados
         clientes = Cliente.objects.all()
         context = {
             'clientes': clientes
@@ -144,9 +146,10 @@ def listar_clientes(request):
 #vista activar cliente
 def activar_cliente(request, cliente_id):
     try:
+        #Accede al cliente que corresponde con la id ingresada
         cliente = Cliente.objects.get(id=cliente_id)
         cliente.activo = True
-        cliente.save()
+        cliente.save() #Guarda el nuevo estado del cliente
         mensaje = "Registro de cliente activado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'activar_cliente.html', context)
@@ -158,9 +161,10 @@ def activar_cliente(request, cliente_id):
 #vista desactivar_cliente   
 def desactivar_cliente(request, id):
     try:
+        #Accede al cliente que corresponde con la id ingresada
         cliente = Cliente.objects.get(id=id)
         cliente.activo = False
-        cliente.save()
+        cliente.save() #Guarda el nuevo estado del cliente
         mensaje = "Registro de cliente desactivado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_cliente.html', context)
