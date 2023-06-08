@@ -31,18 +31,20 @@ Proyecto Integrador Grupal Squad 3 Comision 5 - Caso de Negocio N° 1  -
 
 &emsp;&emsp;&emsp;&emsp; - [Modulo Reserva de Servicio](#modulo-reserva-de-servicio)
 
-### Sobre el proyecto
+&emsp;&emsp;&emsp;&emsp; - [API del Sistema](#api-del-sistema)
+
+## *Sobre el Proyecto*
  <br/>
 Nuestro proyecto integrador final consiste en el desarrollo de una aplicación web base de reservas de servicios para eventos, la cual permitirá a sus usuarios consultar el catálogo de servicios que la empresa ofrece, y un listado de las reservas realizadas por los clientes. <br /> Esta aplicación permite el registro de empleados, servicios y clientes, asi como la visualización del listado de los mismos. A su vez, es posible acceder a diferentes endpoints con los datos disponibles correspondientes a cada categoría. <br /> Se utilizaron Python/Django como entorno de desarrollo, SQL como base de datos y, las librerias Jinja y Bootstrap.
 
  <br/>
 
-### Como ponerlo en marcha localmente ? 
-#### Requisitos
+## *Como ponerlo en marcha localmente ?* 
+### Requisitos
 * Python 3.9 o versiones recientes
 * Django 4.0
 * Jinja2
-#### Instalacion
+### Instalacion
 1.  Clonar este repositorio, desde la terminal escribir:
 ```
 git clone https://github.com/panchocdk/DjangoC5S3-Eventos.git
@@ -66,8 +68,8 @@ python manage.py createsuperuser
 python manage.py runserver
 
 ```
-### Documentación 
-#### Modulo Cliente
+## *Documentacion*
+## Modulo Cliente
 En este modulo se pueden registrar nuevos clientes, actualizarlos, acceder al listado de clientes activos y eliminar o restaurar registros.
 
  -  [Registrar Cliente](http://127.0.0.1:8000/crear_cliente/)
@@ -92,7 +94,7 @@ En este modulo se pueden registrar nuevos clientes, actualizarlos, acceder al li
 
  <br/>
 
-#### Modulo Empleado
+## Modulo Empleado
 En este modulo se pueden registrar nuevos empleados, actualizarlos, acceder al listado de empleados activos y eliminar o restaurar registros.
 
  -  [Registrar Empleado](http://127.0.0.1:8000/crear_empleado/)
@@ -119,7 +121,7 @@ En este modulo se pueden registrar nuevos empleados, actualizarlos, acceder al l
 
  <br/>
 
- #### Modulo Coordinador
+ ## Modulo Coordinador
 En este modulo se pueden registrar nuevos coordinadores, actualizarlos, acceder al listado de coordinadores activos y eliminar o restaurar registros.
 
  -  [Registrar Coordinador](http://127.0.0.1:8000/crear_coordinador/)
@@ -146,7 +148,7 @@ En este modulo se pueden registrar nuevos coordinadores, actualizarlos, acceder 
  
  <br/>
 
- #### Modulo Servicio
+ ## Modulo Servicio
 En este modulo se pueden registrar nuevos servicios, actualizarlos, acceder al listado de servicios activos y eliminar o restaurar registros.
 
  -  [Registrar Servicio](http://127.0.0.1:8000/crear_servicio/)
@@ -173,7 +175,7 @@ En este modulo se pueden registrar nuevos servicios, actualizarlos, acceder al l
   
  <br/>
 
- #### Modulo Reserva de Servicio
+ ## Modulo Reserva de Servicio
 En este modulo se pueden registrar nuevas reservas servicios, actualizarlas, acceder al listado de reservas activas y eliminar o restaurar registros.
 
  -  [Registrar Reserva de Servicio](http://127.0.0.1:8000/crear_reserva/)
@@ -194,3 +196,37 @@ En este modulo se pueden registrar nuevas reservas servicios, actualizarlas, acc
 
 <img src="static\img\captures\eliminar_reserva.png"/>
  
+ <br/>
+
+ ## API del Sistema
+ A traves de API es posible la visualización de los diferentes listados correspondientes a los modulos de servicios, clientes, empleados y coordinadores. Permite obtener información de todos los registros del sistema.
+ 
+| Modelo | Endpoint | Descripcion |
+| :--- | :--- | :--- |
+| Cliente |[Listado de Clientes](http://127.0.0.1:8000/api/clientes/) | Se visualiza el [listado](#endpoint-listado-de-clientes) de todos los clientes|
+| Empleados |[Listado de Empleados](http://127.0.0.1:8000/api/empleados/) | Se visualiza el [listado](#endpoint-listado-de-empleados) de todos los empleados|
+| Coordinadores |[Listado de Coordinadores](http://127.0.0.1:8000/api/coordinadores/) | Se visualiza el [listado](#endpoint-listado-de-coordinadores) de todos los coordinadores|
+| Servicio |[Listado de Servicios](http://127.0.0.1:8000/api/servicios/) | Se visualiza el [listado](#endpoint-listado-de-servicios) de todos los servicios|
+| Servicio |api/servicios/<int:id>| Se visualiza un [registro](#endpoint-de-servicio-por-id) de servicio|
+
+`Pantallas:`
+### - Endpoint listado de clientes:
+<br/>
+<img src="static\img\captures\endpoint_clientes.png"/>
+
+### - Endpoint listado de empleados
+<br/>
+<img src="static\img\captures\endpoint_empleados.png"/>
+
+### - Endpoint listado de coordinadores
+<br/>
+<img src="static\img\captures\endpoint_coordinadores.png"/>
+
+### - Endpoint listado de servicios
+<br/>
+<img src="static\img\captures\endpoint_servicios.png"/>
+
+### -Endpoint de servicio por id
+<br/>
+<img src="static\img\captures\endpoint_serviciosporid.png"/>
+
