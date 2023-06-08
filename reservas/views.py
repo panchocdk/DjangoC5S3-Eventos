@@ -268,7 +268,7 @@ def desactivar_coordinador(request, coordinador_id):
 #------------------SERVICIOS----------------------------------------------------------------------------------
 
 
-#vista para registrar servicios 
+#Vista para registrar servicios 
 def crear_servicio(request):
     #Instancia de ServicioForm
     form=ServicioForm()
@@ -281,7 +281,7 @@ def crear_servicio(request):
                 precio=form.cleaned_data['precio'],    
             )
             servicio.save()
-            return redirect('/listar_servicios/')
+            return redirect('/listar_servicios/')#Redirecciona al listado de servicios
         else:
             return redirect('/listar_servicios/')
     context={
@@ -296,8 +296,8 @@ def actualizar_servicio(request, servicio_id):
         if request.method == 'POST':
             form = ServicioForm(request.POST, instance=servicio)
             if form.is_valid():
-                form.save()
-                return redirect('/listar_servicios/')
+                form.save() #Duarda los datos actualizados del servicio
+                return redirect('/listar_servicios/')#Redirecciona al listado de servicios
         else:
             form = ServicioForm(instance=servicio)
         context = {'form': form}
@@ -305,9 +305,10 @@ def actualizar_servicio(request, servicio_id):
     except Exception:
         return render(request, 'error.html')
     
-#view para el listado de servicios
+#Vista para el listado de servicios
 def listar_servicios(request):
     try:
+        #Accede a todos los servicios creados
         servicios=Servicio.objects.all()
         context={
             'servicios':servicios
@@ -319,9 +320,10 @@ def listar_servicios(request):
 #Vista para activar un servicio
 def activar_servicio(request, id):
     try:
+        #Accede al servicio cuya id coincida con la id ingresada
         servicio = Servicio.objects.get(id=id)
         servicio.activo = True
-        servicio.save()
+        servicio.save() #Guarda el nuevo estado del servicio
         mensaje = "Registro de servicio activado correctamente."
         context = {'mensaje':mensaje}
         return render(request, 'activar_servicio.html', context)
@@ -330,12 +332,13 @@ def activar_servicio(request, id):
         context = {'mensaje': mensaje}
         return render(request, 'activar_servicio.html', context)
     
-#view para desactivar servicios
+#Vista para desactivar servicios
 def desactivar_servicio(request, id):
     try:
+        #Accede al servicio cuya d coincida con la ingresada
         servicio = Servicio.objects.get(id=id)
         servicio.activo = False
-        servicio.save()
+        servicio.save() #Guarda el nuevo estado del servicio
         mensaje = "Registro de servicio desactivado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_servicio.html', context)
