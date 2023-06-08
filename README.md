@@ -33,6 +33,8 @@ Proyecto Integrador Grupal Squad 3 Comision 5 - Caso de Negocio N° 1  -
 
 &emsp;&emsp;&emsp;&emsp; - [API del Sistema](#api-del-sistema)
 
+&emsp;&emsp;&emsp;&emsp; - [Admin del Proyecto](#admin-del-proyecto)
+
 ## *Sobre el Proyecto*
  <br/>
 Nuestro proyecto integrador final consiste en el desarrollo de una aplicación web base de reservas de servicios para eventos, la cual permitirá a sus usuarios consultar el catálogo de servicios que la empresa ofrece, y un listado de las reservas realizadas por los clientes. <br /> Esta aplicación permite el registro de empleados, servicios y clientes, asi como la visualización del listado de los mismos. A su vez, es posible acceder a diferentes endpoints con los datos disponibles correspondientes a cada categoría. <br /> Se utilizaron Python/Django como entorno de desarrollo, SQL como base de datos y, las librerias Jinja y Bootstrap.
@@ -230,3 +232,11 @@ En este modulo se pueden registrar nuevas reservas servicios, actualizarlas, acc
 <br/>
 <img src="static\img\captures\endpoint_serviciosporid.png"/>
 
+## Admin del Proyecto
+Desde el [admin de Django](http://127.0.0.1:8000/admin/) es posible acceder y manipular facilmente los registros de una entidad. Para ingresar es necesario contar con credenciales de id, usuario y contraseña de administrador. <br/>En el caso de nuestro proyecto, al ingresar se visualiza la siguiente pantalla:
+
+ <img src="static\img\captures\admin.png"/>
+
+ Desde allí es posible consultar, agregar, modificar y eliminar registros. A su vez, permite filtrar y obtener información de aquellos registros de entidades que cumplan con ciertas condiciones. A continuación se muestra la vista al acceder a Clientes:
+
+  <img src="static\img\captures\admincliente.png"/>
