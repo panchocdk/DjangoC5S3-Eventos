@@ -351,9 +351,9 @@ def desactivar_servicio(request, id):
 #----------------RESERVA DE SERVICIOS-------------------------------------------------------------
 
 
-#vista para registrar reservas de servicio
+#Vista para registrar una reserva de servicio
 def crear_reserva(request):
-    #Instancia de ServicioForm
+    #Instancia de ReservaDeServicioForm
     form=ReservaDeServicioForm()
     if request.POST:
         form=ReservaDeServicioForm(request.POST)
@@ -365,8 +365,8 @@ def crear_reserva(request):
                 empleado=form.cleaned_data['empleado'],
                 servicio=form.cleaned_data['servicio'],
             )
-            reserva.save()            
-            return redirect('/listar_reservas/')
+            reserva.save() #Guarda los datos de la nueva reserva de servicio          
+            return redirect('/listar_reservas/') #Redirecciona al listado de reservas
         else:
             return redirect('/listar_reservas/')
     context={
@@ -377,12 +377,13 @@ def crear_reserva(request):
 #Vista para actualizar una Reserva de Servicio
 def actualizar_reserva(request, reserva_id):
     try:
+        #Accede a la reserva cuya id coincida con la ingresada
         reserva = ReservaDeServicio.objects.get(id=reserva_id)
         if request.method == 'POST':
             form = ReservaDeServicioForm(request.POST, instance=reserva)
             if form.is_valid():
-                form.save()
-                return redirect('/listar_reservas/')
+                form.save() #Guarda los datos actualizados de la reserva
+                return redirect('/listar_reservas/') #Redirecciona al listado
         else:
             form = ReservaDeServicioForm(instance=reserva)
         context = {'form': form}
@@ -393,6 +394,7 @@ def actualizar_reserva(request, reserva_id):
 #Vista para el listado de Reservas de Servicios
 def listar_reservas(request):
     try:
+        #Accede a todas las reservas de serviios registradas
         reservas=ReservaDeServicio.objects.all()
         context={
             'reservas':reservas
@@ -404,9 +406,10 @@ def listar_reservas(request):
 #Vista para eliminar una reserva de servicio 
 def eliminar_reserva(request, id):
     try:
+        #Accede a la reserva cuya id coincida con la ingresada
         reserva = ReservaDeServicio.objects.get(id=id)    
         if request.POST:
-            reserva.delete()
+            reserva.delete() #Elimina la reserva seleccionada
             return redirect('/eliminar_ok/')
         context={'reserva':reserva}
         return render(request, 'eliminar_reserva.html', context)
