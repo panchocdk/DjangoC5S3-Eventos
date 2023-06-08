@@ -21,7 +21,9 @@ Proyecto Integrador Grupal Squad 3 Comision 5 - Caso de Negocio N° 1  -
 2.  [Como ponerlo en marcha localmente ?](#como-ponerlo-en-marcha-localmentecomo-ponerlo-en-)
 3.  [Documentación](#documentación)
 
-&emsp;&emsp;&emsp;&emsp; * [Modulo Clientes](#modulo-clientes)
+&emsp;&emsp;&emsp;&emsp; - [Modulo Clientes](#modulo-cliente)
+
+&emsp;&emsp;&emsp;&emsp; - [Modulo Empleado](#modulo-empleado)
 
 ### Sobre el proyecto
  <br/>
@@ -59,8 +61,8 @@ python manage.py runserver
 
 ```
 ### Documentación 
-#### Modulo Clientes
-En este modulo se puedesn registrar nuevos clientes, actualizarlos, acceder al listado de clientes activos y eliminar o restaurar registros.
+#### Modulo Cliente
+En este modulo se pueden registrar nuevos clientes, actualizarlos, acceder al listado de clientes activos y eliminar o restaurar registros.
 
  -  [Registrar Cliente](http://127.0.0.1:8000/crear_cliente/)
 
@@ -82,4 +84,28 @@ En este modulo se puedesn registrar nuevos clientes, actualizarlos, acceder al l
 
  -  [Desactivar Cliente 1](http://127.0.0.1:8000/desactivar_cliente/1)
 
+#### Modulo Empleado
+En este modulo se puedesn registrar nuevos empleados, actualizarlos, acceder al listado de empleados activos y eliminar o restaurar registros.
+
+ -  [Registrar Empleado](http://127.0.0.1:8000/crear_empleado/)
+
+ <img src="static\img\captures\registrar_empleado.png"/>
+
+ -  [Listado de Empleados](http://127.0.0.1:8000/listar_empleados/)
+
+  <img src="static\img\captures\listar_empleados.png"/>
+
+ Funcionalidades para registros de empleados existentes. A modo de ejemplo:
+
+ -  [Actualizar Empleado 1](http://127.0.0.1:8000/actualizar_empleado/1)
+
+<img src="static\img\captures\actualizar_empleado.png"/>
+
+ -  [Activar Empleado 1](http://127.0.0.1:8000/activar_empleado/1)
+
+<img src="static\img\captures\activar_empleado.png"/>
+
+ -  [Desactivar Empleado 1](http://127.0.0.1:8000/desactivar_empleado/1)
+
+<img src="static\img\captures\desactivar_empleado.png"/>
  

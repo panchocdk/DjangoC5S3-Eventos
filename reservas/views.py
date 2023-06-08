@@ -16,7 +16,7 @@ def inicio(request):
 
 #Vista para Registrar nuevo Empleados
 def crear_empleado(request):
-    #Instancia de ProductoForm
+    #Instancia de EmpleadoForm
     form=EmpleadoForm()
     if request.POST:
         form=EmpleadoForm(request.POST)
@@ -27,7 +27,7 @@ def crear_empleado(request):
                 numero_legajo=form.cleaned_data['numero_legajo']
             )
             empleado.save()
-            return redirect('/listar_empleados/')
+            return redirect('/listar_empleados/') #Redirecciona al listado de empleados
         else:
             return redirect('/crear_empleado/')
     context={
@@ -38,12 +38,13 @@ def crear_empleado(request):
 #Vista para Actualizar un Empleado
 def actualizar_empleado(request, empleado_id):
     try:
+        #Accede al empleado que corresponde con la id ingresada
         empleado = Empleado.objects.get(id=empleado_id)
         if request.method == 'POST':
             form = EmpleadoForm(request.POST, instance=empleado)
             if form.is_valid():
-                form.save()
-            return redirect('/listar_empleados/')
+                form.save() #Guarda los datos actualizados del empleado
+            return redirect('/listar_empleados/') #Redirecciona al listado
         else:
             form = EmpleadoForm(instance=empleado)
         context = {'form': form}
@@ -54,6 +55,7 @@ def actualizar_empleado(request, empleado_id):
 #Vista para Listar a los Empleados
 def listar_empleados(request):
     try:
+        #Accede a todos los empleados creados
         empleados=Empleado.objects.all()
         context={
             'empleados':empleados
@@ -62,12 +64,13 @@ def listar_empleados(request):
     except Exception:
         return render(request, 'error.html')
 
-#vista activar_empleado 
+#Vista para activar un empleado
 def activar_empleado(request, id):
     try:
+        #Accede al empleado cuyo registro corresponde con la id ingresada
         empleado = Empleado.objects.get(id=id)
         empleado.activo = True
-        empleado.save()
+        empleado.save() #Guarda el nuevo estado del empleado
         mensaje = "Registro de empleado activado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'activar_empleado.html', context)
@@ -76,12 +79,13 @@ def activar_empleado(request, id):
         context = {'mensaje': mensaje}
         return render(request, 'activar_empleado.html', context)
 
-#vista desactivar_empleado    
+#Vista para desactivar un empleado    
 def desactivar_empleado(request, id):
     try:
+        #Accede al empleado cuyo registro corresponde con la id ingresada
         empleado = Empleado.objects.get(id=id)
         empleado.activo = False
-        empleado.save()
+        empleado.save() #Guarda el nuevo estado del empleado
         mensaje = "Registro de empleado desactivado correctamente."
         context = {'mensaje': mensaje}
         return render(request, 'desactivar_empleado.html', context)
